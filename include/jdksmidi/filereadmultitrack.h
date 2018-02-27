@@ -50,7 +50,7 @@ namespace jdksmidi
 
 class MIDIFileReadMultiTrack : public MIDIFileEvents
 {
-  public:
+public:
     MIDIFileReadMultiTrack( MIDIMultiTrack *mlttrk );
 
     virtual ~MIDIFileReadMultiTrack();
@@ -85,7 +85,7 @@ class MIDIFileReadMultiTrack : public MIDIFileEvents
     // test and sort events temporal order in all tracks
     virtual void SortEventsOrder();
 
-  protected:
+protected:
 
     // return false if dest_track absent or no space for event
     bool AddEventToMultiTrack( const MIDITimedMessage &msg, MIDISystemExclusive *sysex, int dest_track );

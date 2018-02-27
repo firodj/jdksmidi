@@ -162,7 +162,8 @@ void DumpMIDIMultiTrack( MIDIMultiTrack *mlt, int trk = -1 )
             system( "PAUSE" );
             num_lines = 0;
         }
-    } while ( i.GoToNextEvent() );
+    }
+    while ( i.GoToNextEvent() );
 }
 
 void PrintResolution()

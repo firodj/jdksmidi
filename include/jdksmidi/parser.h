@@ -43,7 +43,7 @@ namespace jdksmidi
 
 class MIDIParser
 {
-  public:
+public:
     MIDIParser( ushort max_sysex_size = 384 );
     virtual ~MIDIParser();
 
@@ -59,7 +59,7 @@ class MIDIParser
         return sysex;
     }
 
-  protected:
+protected:
 
     //
     // The states used for parsing messages.

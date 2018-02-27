@@ -74,7 +74,7 @@ class MIDIDeltaTimedBigMessage;
 
 class MIDIMessage
 {
-  public:
+public:
 
     ///@name The Constructors and Initializing methods
     //@{
@@ -751,7 +751,7 @@ class MIDIMessage
 
     //@}
 
-  protected:
+protected:
 
     static const char *chan_msg_name[16]; ///< Simple ascii text strings describing each channel message type (0x8X to 0xeX)
     static const char *sys_msg_name[16];  ///< Simple ascii text strings describing each system message type (0xf0 to 0xff)
@@ -778,7 +778,7 @@ class MIDIMessage
 
 class MIDIBigMessage : public MIDIMessage
 {
-  public:
+public:
 
     ///@name Constructors/assignment operators/Copiers
     //@{
@@ -847,7 +847,7 @@ class MIDIBigMessage : public MIDIMessage
 
     friend bool operator==( const MIDIBigMessage &m1, const MIDIBigMessage &m2 );
 
-  protected:
+protected:
 
     MIDISystemExclusive *sysex;
 };
@@ -859,7 +859,7 @@ class MIDIBigMessage : public MIDIMessage
 
 class MIDITimedMessage : public MIDIMessage
 {
-  public:
+public:
 
     //
     // Constructors
@@ -914,14 +914,14 @@ class MIDITimedMessage : public MIDIMessage
 
     friend bool operator==( const MIDITimedMessage &m1, const MIDITimedMessage &m2 );
 
-  protected:
+protected:
 
     MIDIClockTime time;
 };
 
 class MIDIDeltaTimedMessage : public MIDIMessage
 {
-  public:
+public:
 
     //
     // Constructors
@@ -957,7 +957,7 @@ class MIDIDeltaTimedMessage : public MIDIMessage
 
     void SetDeltaTime( MIDIClockTime t );
 
-  protected:
+protected:
     MIDIClockTime dtime;
 };
 
@@ -971,7 +971,7 @@ class MIDIDeltaTimedMessage : public MIDIMessage
 
 class MIDITimedBigMessage : public MIDIBigMessage
 {
-  public:
+public:
 
     //
     // Constructors
@@ -1065,13 +1065,13 @@ class MIDITimedBigMessage : public MIDIBigMessage
 
     friend bool operator==( const MIDITimedBigMessage &m1, const MIDITimedBigMessage &m2 );
 
-  protected:
+protected:
     MIDIClockTime time;
 };
 
 class MIDIDeltaTimedBigMessage : public MIDIBigMessage
 {
-  public:
+public:
     //
     // Constructors
     //
@@ -1114,7 +1114,7 @@ class MIDIDeltaTimedBigMessage : public MIDIBigMessage
 
     void SetDeltaTime( MIDIClockTime t );
 
-  protected:
+protected:
     MIDIClockTime dtime;
 };
 }

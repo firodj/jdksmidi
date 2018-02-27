@@ -59,7 +59,7 @@ class MIDIFileRead;
 /// to be read from a MIDI file
 class MIDIFileReadStream
 {
-  public:
+public:
     MIDIFileReadStream()
     {
     }
@@ -79,7 +79,7 @@ class MIDIFileReadStream
 /// a stream of *char* to a FILE C object,
 class MIDIFileReadStreamFile : public MIDIFileReadStream
 {
-  public:
+public:
     /// In this constructor you must specify the filename.\ The constructor tries to open the FILE, you
     /// should call IsValid() for checking if it was successful
     explicit MIDIFileReadStreamFile( const char *fname )
@@ -130,14 +130,14 @@ class MIDIFileReadStreamFile : public MIDIFileReadStream
         return r;
     }
 
-  private:
+private:
     FILE *f;
 };
 
 /// This class is used internally for reading MIDI files
 class MIDIFileEvents : protected MIDIFile
 {
-  public:
+public:
     MIDIFileEvents()
     {
     }
@@ -194,7 +194,7 @@ class MIDIFileEvents : protected MIDIFile
 /// object into MIDI data
 class MIDIFileRead : protected MIDIFile
 {
-  public:
+public:
     /// In the constructor you must specify the MIDIFileReadStream.\ The stream must be alreafy opem
     MIDIFileRead( MIDIFileReadStream *input_stream_, MIDIFileEvents *event_handler_, unsigned long max_msg_len = 8192 );
 
@@ -228,7 +228,7 @@ class MIDIFileRead : protected MIDIFile
     }
     //@}
 
-  protected:
+protected:
     virtual int ReadHeader();
     virtual void mf_error( const char * );
 
@@ -242,7 +242,7 @@ class MIDIFileRead : protected MIDIFile
     int max_msg_len;
     int act_msg_len; // actual msg length
 
-  private:
+private:
     unsigned long ReadVariableNum();
     unsigned long Read32Bit();
     int Read16Bit();

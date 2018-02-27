@@ -76,7 +76,8 @@ unsigned long MIDIFile::ReadVariableLengthNumber( unsigned char **in )
     {
         num <<= 7;
         num |= ( *t );
-    } while ( ( *t++ ) & 0x80 );
+    }
+    while ( ( *t++ ) & 0x80 );
 
     *in = t;
     return num;
@@ -103,7 +104,8 @@ unsigned char *MIDIFile::WriteVariableLengthNumber( unsigned long num, unsigned 
 
         else
             break;
-    } while ( true );
+    }
+    while ( true );
 
     return out;
 }

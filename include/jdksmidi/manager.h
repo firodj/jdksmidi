@@ -50,7 +50,7 @@ namespace jdksmidi
 
 class MIDIManager : public MIDITick
 {
-  public:
+public:
     /// The constructor.
     /// \param drv the MIDIDriver to whom send MIDI messages
     /// \param n an optional MIDISequencerGUIEventNotifier (so the class can notify the GUI when sequencer starts or stops)
@@ -170,7 +170,7 @@ class MIDIManager : public MIDITick
     /// This is the callback function inherited from MIDITick class. It only calls TimeTickPlayMode or TimeTickStopMode
     virtual void TimeTick( unsigned long sys_time );
 
-  protected:
+protected:
 
     /// This is the callback function that at every timer tick picks MIDI messages from the sequencer and
     /// sends them to the driver (and then to the MIDI out port).

@@ -74,18 +74,18 @@ static void FixQuotes ( char *s_ )
 AdvancedSequencer::AdvancedSequencer( MIDISequencerGUIEventNotifier *n )
     :
 #if defined _WIN32 || defined WIN32
-      driver( new MIDIDriverWin32() ), /* NEW BY NC: queue_size given as default
+    driver( new MIDIDriverWin32() ), /* NEW BY NC: queue_size given as default
                                           parameter */
 #else
-      driver( new MIDIDriverAlsa() ),
+    driver( new MIDIDriverAlsa() ),
 #endif // _WIN32
-      notifier( n ), tracks( new MIDIMultiTrack( 17 ) ),
-      seq( new MIDISequencer( tracks, notifier ) ),
-      mgr( new MIDIManager( driver, notifier, seq ) ), thru_processor( 2 ),
-      thru_transposer(), thru_rechannelizer(), num_measures( 0 ),
-      repeat_start_measure( 0 ), repeat_end_measure( 0 ),
-      repeat_play_mode( false ), file_loaded( false ), in_port(), out_port(),
-      ctor_type( CTOR_1 ) // remembers what objects are owned
+    notifier( n ), tracks( new MIDIMultiTrack( 17 ) ),
+    seq( new MIDISequencer( tracks, notifier ) ),
+    mgr( new MIDIManager( driver, notifier, seq ) ), thru_processor( 2 ),
+    thru_transposer(), thru_rechannelizer(), num_measures( 0 ),
+    repeat_start_measure( 0 ), repeat_end_measure( 0 ),
+    repeat_play_mode( false ), file_loaded( false ), in_port(), out_port(),
+    ctor_type( CTOR_1 ) // remembers what objects are owned
 
 // chain_mode ( false ) OLD (see header)
 
@@ -104,18 +104,18 @@ AdvancedSequencer::AdvancedSequencer( MIDIMultiTrack *mlt,
                                       MIDISequencerGUIEventNotifier *n )
     :
 #if defined _WIN32 || defined WIN32
-      driver( new MIDIDriverWin32() ), /* NEW BY NC: queue_size given as default
+    driver( new MIDIDriverWin32() ), /* NEW BY NC: queue_size given as default
                                           parameter */
 #else
-      driver( new MIDIDriverAlsa() ),
+    driver( new MIDIDriverAlsa() ),
 #endif // _WIN32
-      notifier( n ), tracks( mlt ),
-      seq( new MIDISequencer( tracks, notifier ) ),
-      mgr( new MIDIManager( driver, notifier, seq ) ), thru_processor( 2 ),
-      thru_transposer(), thru_rechannelizer(), num_measures( 0 ),
-      repeat_start_measure( 0 ), repeat_end_measure( 0 ),
-      repeat_play_mode( false ), file_loaded( false ), in_port(), out_port(),
-      ctor_type( CTOR_2 ) // remembers what objects are owned
+    notifier( n ), tracks( mlt ),
+    seq( new MIDISequencer( tracks, notifier ) ),
+    mgr( new MIDIManager( driver, notifier, seq ) ), thru_processor( 2 ),
+    thru_transposer(), thru_rechannelizer(), num_measures( 0 ),
+    repeat_start_measure( 0 ), repeat_end_measure( 0 ),
+    repeat_play_mode( false ), file_loaded( false ), in_port(), out_port(),
+    ctor_type( CTOR_2 ) // remembers what objects are owned
 
 {
     /* NOTE BY NC: currently we open midi (and start timer) in the ctor and
@@ -130,18 +130,18 @@ AdvancedSequencer::AdvancedSequencer( MIDIMultiTrack *mlt,
 AdvancedSequencer::AdvancedSequencer( MIDIManager *mgr_ )
     :
 #if defined _WIN32 || defined WIN32
-      driver( new MIDIDriverWin32() ), /* NEW BY NC: queue_size given as default
+    driver( new MIDIDriverWin32() ), /* NEW BY NC: queue_size given as default
                                           parameter */
 #else
-      driver( new MIDIDriverAlsa() ),
+    driver( new MIDIDriverAlsa() ),
 #endif // _WIN32
-      notifier( mgr_->GetSeq()->GetState()->notifier ),
-      tracks( (MIDIMultiTrack *)( mgr_->GetSeq()->GetState()->multitrack ) ),
-      seq( mgr_->GetSeq() ), mgr( mgr_ ), thru_processor( 2 ),
-      thru_transposer(), thru_rechannelizer(), num_measures( 0 ),
-      repeat_start_measure( 0 ), repeat_end_measure( 0 ),
-      repeat_play_mode( false ), file_loaded( false ), in_port(), out_port(),
-      ctor_type( CTOR_3 ) // remembers what objects are owned
+    notifier( mgr_->GetSeq()->GetState()->notifier ),
+    tracks( (MIDIMultiTrack *)( mgr_->GetSeq()->GetState()->multitrack ) ),
+    seq( mgr_->GetSeq() ), mgr( mgr_ ), thru_processor( 2 ),
+    thru_transposer(), thru_rechannelizer(), num_measures( 0 ),
+    repeat_start_measure( 0 ), repeat_end_measure( 0 ),
+    repeat_play_mode( false ), file_loaded( false ), in_port(), out_port(),
+    ctor_type( CTOR_3 ) // remembers what objects are owned
 
 {
     /* NOTE BY NC: currently we open midi (and start timer) in the ctor and
@@ -258,9 +258,9 @@ void AdvancedSequencer::Reset()
     seq->ResetAllTracks();
     seq->GoToZero();
     jdks_wait( 100 ); // allows the out queue to be emptied (previous functions
-                      // call AllNotesOff()
+    // call AllNotesOff()
     driver->Reset();  // clear queues and resets the MIDI out port to default
-                      // values
+    // values
 }
 
 void AdvancedSequencer::GoToZero()
@@ -447,8 +447,8 @@ void AdvancedSequencer::SoloTrack( int trk )
     if ( IsPlay() )
     {
         CatchEventsBefore( trk ); // track could be muted before soloing: this
-                                  // set appropriate CC, PC, etc
-                                  // not previously sent
+        // set appropriate CC, PC, etc
+        // not previously sent
     }
     seq->SetSoloMode( true, trk );
     for ( int i = 0; i < seq->GetNumTracks(); ++i )
@@ -478,7 +478,7 @@ void AdvancedSequencer::UnSoloTrack()
     if ( IsPlay() )
     {
         CatchEventsBefore(); // this set appropriate CC, PC, etc for previously
-                             // muted tracks
+        // muted tracks
     }
     seq->SetSoloMode( false );
 }
@@ -508,7 +508,7 @@ void AdvancedSequencer::SetTrackMute( int trk, bool f )
         else
         {
             CatchEventsBefore( trk ); // track was muted: this set appropriate
-                                      // CC, PC, etc not previously sent
+            // CC, PC, etc not previously sent
         }
     }
 }
@@ -531,7 +531,7 @@ void AdvancedSequencer::UnmuteAllTracks()
     if ( IsPlay() )
     {
         CatchEventsBefore(); // this set appropriate CC, PC, etc for previously
-                             // muted tracks
+        // muted tracks
     }
 }
 
@@ -546,7 +546,8 @@ void AdvancedSequencer::SetTempoScale( double scale )
 }
 
 MIDIClockTime AdvancedSequencer::GetCurrentMIDIClockTime() const
-{ // new by NC
+{
+    // new by NC
     MIDIClockTime time = seq->GetCurrentMIDIClockTime();
     if ( mgr->IsSeqPlay() )
     {
@@ -860,13 +861,14 @@ const char *AdvancedSequencer::GetCurrentMarker() const
 }
 
 void AdvancedSequencer::SetChanged()
-{ // IMPORTANT: REWRITTEN: WAS BUGGY!!!!!
+{
+    // IMPORTANT: REWRITTEN: WAS BUGGY!!!!!
     bool was_playing = false;
     if ( IsPlay() )
     {
         was_playing = true;
         Stop(); // however you should avoid to edit the MIDIMultiTrack during
-                // playback!
+        // playback!
     }
     file_loaded = true;
     ExtractWarpPositions();
@@ -1012,17 +1014,20 @@ void AdvancedSequencer::ExtractWarpPositions()
 
         // save current sequencer state at this position
         if ( num_warp_positions < warp_positions.size() )
-        { // copy if it's already contained ...
+        {
+            // copy if it's already contained ...
             warp_positions[num_warp_positions] = *seq->GetState();
         }
         else
-        { // ... or push back
+        {
+            // ... or push back
             warp_positions.push_back( MIDISequencerState( *seq->GetState() ) );
         }
         num_warp_positions++;
     }
     while ( warp_positions.size() > num_warp_positions )
-    {   // adjust vector size if it was greater than actual (currently
+    {
+        // adjust vector size if it was greater than actual (currently
         // num_warp_positions is the last
         // vector index plus 1, so the comparison is OK)
         warp_positions.pop_back();
@@ -1060,14 +1065,16 @@ void AdvancedSequencer::CatchEventsBefore()
         if ( msg.IsChannelMsg() ) // channel messages
         {
             if ( msg.IsControlChange() || msg.IsProgramChange() || msg.IsPitchBend() )
-            { // only send these messages
+            {
+                // only send these messages
                 OutputMessage( msg );
             }
         }
         else if ( msg.IsMetaEvent() )
         {
             if ( msg.IsTempo() )
-            { // discards all meta events except tempo messages
+            {
+                // discards all meta events except tempo messages
                 OutputMessage( msg );
             }
         }
@@ -1077,13 +1084,14 @@ void AdvancedSequencer::CatchEventsBefore()
             jdks_wait( 10 );
         }
         else
-        { // TODO: which other messages should we send???
+        {
+            // TODO: which other messages should we send???
             // DumpMIDITimedBigMessage(&msg);
             OutputMessage( msg ); // prudentially sends an unrecognized message
         }
         iter.GoToNextEvent(); // NOTE BY NC: this GetCurEvent should move the
-                              // iterator to the
-                              // next step, so this should be unneeded
+        // iterator to the
+        // next step, so this should be unneeded
     }
 }
 
@@ -1103,25 +1111,28 @@ void AdvancedSequencer::CatchEventsBefore( int trk )
         if ( msg.IsChannelMsg() ) // channel messages
         {
             if ( msg.IsControlChange() || msg.IsProgramChange() || msg.IsPitchBend() )
-            { // only send these messages
+            {
+                // only send these messages
                 OutputMessage( msg );
             }
         }
         else if ( msg.IsMetaEvent() )
         {
             if ( msg.IsTempo() )
-            { // discards all meta events except tempo messages
+            {
+                // discards all meta events except tempo messages
                 OutputMessage( msg );
             }
         }
         else if ( msg.IsSystemExclusive() ) // TODO: which SysEx should we
-                                            // send???
+            // send???
         {
             OutputMessage( msg );
             jdks_wait( 10 );
         }
         else
-        { // TODO: which other messages should we send???
+        {
+            // TODO: which other messages should we send???
             // DumpMIDITimedBigMessage(&msg);
             OutputMessage( msg ); // prudentially sends an unrecognized message
         }

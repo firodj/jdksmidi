@@ -34,7 +34,7 @@ namespace jdksmidi
 
 class MIDISong
 {
-  public:
+public:
     MIDISong( int max_tracks );
     virtual ~MIDISong();
 
@@ -62,7 +62,7 @@ class MIDISong
         return sequencer;
     }
 
-  protected:
+protected:
 
     MIDIMultiTrack track;
     MIDISequencer seq;

@@ -45,7 +45,7 @@ namespace jdksmidi
 
 class MIDISystemExclusive
 {
-  public:
+public:
     MIDISystemExclusive( int size = 384 );
 
     MIDISystemExclusive( const MIDISystemExclusive &e );
@@ -148,7 +148,7 @@ class MIDISystemExclusive
         return buf;
     }
 
-  private:
+private:
 
     unsigned char *buf;
     int max_len;

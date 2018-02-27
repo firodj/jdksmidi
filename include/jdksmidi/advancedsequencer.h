@@ -100,7 +100,7 @@ inline void jdks_wait( unsigned int ms )
 
 class AdvancedSequencer
 {
-  public:
+public:
     // AdvancedSequencer(); OLD
     // new by NC: the user can now set his own notifier (text, GUI, or no notifier ...)
 
@@ -397,7 +397,7 @@ class AdvancedSequencer
      * to allow polimorphysm
      */
 
-  protected:
+protected:
     static const int MEASURES_PER_WARP = 4;      ///< Used internally by ExtractWarpPositions() method
     static const int DEFAULT_CLK_PER_BEAT = 120; ///< The default clock per beat rate
 
@@ -449,16 +449,16 @@ class AdvancedSequencer
      */
 
     bool file_loaded; ///< true if the MIDIMultiTrack is not empty
-                      /* NOTE by NC: I mantained this name, but its meaning is now different:
-     * it is nonzero if tracks is nonempty (maybe by an user editing)
-     */
+    /* NOTE by NC: I mantained this name, but its meaning is now different:
+    * it is nonzero if tracks is nonempty (maybe by an user editing)
+    */
 
     int in_port;  ///< the OS id of the open MIDI in port
     int out_port; ///< the OS id of the open MIDI out port
 
     // bool chain_mode; OLD
     // NOTE BY NC: I abandoned this feature, commenting every line referring to it
-  private:
+private:
     enum
     {
         CTOR_1,

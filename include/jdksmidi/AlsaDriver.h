@@ -32,12 +32,12 @@ namespace jdksmidi
 ///<Summary>MIDI Driver for Linux Alsa based machines</Summary>
 class MIDIDriverAlsa : public MIDIDriver
 {
-  public:
+public:
     enum Defaults
     {
         Timer_Resolution_ms = 20, ///< Default MIDI Timer resolution in MilliSeconds
-                                  // NOTE BY NC: Win32 driver has default resolution = 1 ms; is it
-                                  // possible to lower this?
+        // NOTE BY NC: Win32 driver has default resolution = 1 ms; is it
+        // possible to lower this?
         Queue_Length = 128
     };
 
@@ -104,10 +104,10 @@ class MIDIDriverAlsa : public MIDIDriver
         COMPLETED, ///< Async procedure completed running - use StopTimer() to
         /// finish
         INVALID ///< No background procedure running - use StartTimer() to start
-                /// one
+        /// one
     };
 
-  protected:
+protected:
     bool HardwareMsgOut( const jdksmidi::MIDITimedBigMessage &msg );
 
     // RtMidiIn*		        m_pMidiIn;

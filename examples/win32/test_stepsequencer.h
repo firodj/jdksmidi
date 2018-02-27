@@ -41,7 +41,7 @@
 using namespace jdksmidi;
 
 static const char helpstring[] =
-"\nAvailable commands:\n\
+    "\nAvailable commands:\n\
    load filename       : Loads the file into the sequencer\n\
    save filename       : Saves the file\n\
    outport port        : Sets port as current output device\n\
@@ -80,7 +80,7 @@ void DumpMIDIMultiTrack( MIDIMultiTrack *mlt );
 
 class position
 {
-  public:
+public:
 
     position ( MIDIMultiTrack* t ) :
         time( 0 ), track( 1 ), step ( t->GetClksPerBeat() ), tracks( t )
@@ -127,7 +127,7 @@ class position
         track = ( track < tracks->GetNumTracks() - 1 ? track + 1 : track );
     }
 
-  private:
+private:
     MIDIClockTime time;
     int track;
     MIDIClockTime step;

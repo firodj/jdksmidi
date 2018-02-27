@@ -81,7 +81,7 @@ enum
     CONTINUE = 0xFB,     ///< Sequence continue message
     STOP = 0xFC,         ///< Sequence stop message
     ACTIVE_SENSE = 0xFE  ///< Active sense message
-                         //             0xFF // see above RESET
+                   //             0xFF // see above RESET
 };
 
 ///
@@ -113,17 +113,17 @@ enum
     C_SOFT_PEDAL = 0x43, ///< soft pedal
     //              0x44   Legato Footswitch
     C_HOLD_2 = 0x45, ///< hold pedal 2
-                     /*
-                        0x46, // Sound Controller 1, default: Sound Variation
-                        0x47, // Sound Controller 2, default: Timbre/Harmonic Intens.
-                        0x48, // Sound Controller 3, default: Release Time
-                        0x49, // Sound Controller 4, default: Attack Time
-                        0x4A, // Sound Controller 5, default: Brightness
-                        0x4B, // Sound Controller 6, default: Decay Time
-                        0x4C, // Sound Controller 7, default: Vibrato Rate
-                        0x4D, // Sound Controller 8, default: Vibrato Depth
-                        0x4E, // Sound Controller 9, default: Vibrato Delay
-                        0x4F, // Sound Controller 10, default undefined
+    /*
+       0x46, // Sound Controller 1, default: Sound Variation
+       0x47, // Sound Controller 2, default: Timbre/Harmonic Intens.
+       0x48, // Sound Controller 3, default: Release Time
+       0x49, // Sound Controller 4, default: Attack Time
+       0x4A, // Sound Controller 5, default: Brightness
+       0x4B, // Sound Controller 6, default: Decay Time
+       0x4C, // Sound Controller 7, default: Vibrato Rate
+       0x4D, // Sound Controller 8, default: Vibrato Depth
+       0x4E, // Sound Controller 9, default: Vibrato Delay
+       0x4F, // Sound Controller 10, default undefined
     */
     C_GENERAL_5 = 0x50, ///< general purpose controller 5
     C_GENERAL_6 = 0x51, ///< general purpose controller 6
@@ -166,11 +166,11 @@ enum
     RPN_BEND_WIDTH = 0x00, ///< bender sensitivity
     RPN_FINE_TUNE = 0x01,  ///< fine tuning
     RPN_COARSE_TUNE = 0x02 ///< coarse tuning
-                           /*
-                          0x03, // Tuning Program Change
-                          0x04, // Tuning Bank Select
-                          0x05, // Modulation Depth Range
-    */
+                      /*
+                      0x03, // Tuning Program Change
+                      0x04, // Tuning Bank Select
+                      0x05, // Modulation Depth Range
+                      */
 };
 
 ///
@@ -207,7 +207,7 @@ enum
     META_GENERIC_TEXT_F = 0x0F,
 
     META_CHANNEL_PREFIX = 0x20, // This meta event associates a MIDI channel with following meta events.
-                                // It's effect is terminated by another MIDI Channel Prefix event or any non-Meta event.
+    // It's effect is terminated by another MIDI Channel Prefix event or any non-Meta event.
     // It is often used before an Instrument Name Event to specify which channel an instrument name represents.
 
     META_OUTPUT_CABLE = 0x21, // may be MIDI Output Port, data length = 1 byte
@@ -220,8 +220,8 @@ enum
     META_KEYSIG = 0x59,
 
     META_SEQUENCER_SPECIFIC = 0x7F // This meta event is used to specify information specific to a hardware or
-    // software sequencer. The first Data byte (or three bytes if the first byte is 0) specifies the manufacturer's
-    // ID and the following bytes contain information specified by the manufacturer.
+                              // software sequencer. The first Data byte (or three bytes if the first byte is 0) specifies the manufacturer's
+                              // ID and the following bytes contain information specified by the manufacturer.
 };
 
 // internal service number for MIDIMessage::service_num message variable

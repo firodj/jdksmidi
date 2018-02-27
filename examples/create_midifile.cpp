@@ -45,7 +45,7 @@ int main( int argc, char **argv )
 
     MIDITimedBigMessage m; // the object for individual midi events
     unsigned char chan,    // internal midi channel number 0...15 (named 1...16)
-        note, velocity, ctrl, val;
+             note, velocity, ctrl, val;
 
     MIDIClockTime t;         // time in midi ticks
     MIDIClockTime dt = 100;  // time interval (1 second)
@@ -85,8 +85,8 @@ int main( int argc, char **argv )
     tracks.GetTrack( trk )->PutEvent( m );
 
     int tempo = 1000000; // set tempo to 1 000 000 usec = 1 sec in crotchet
-                         // with value of clks_per_beat (100) result 10 msec in 1 midi tick
-                         // If no tempo is define, 120 beats per minute is assumed.
+    // with value of clks_per_beat (100) result 10 msec in 1 midi tick
+    // If no tempo is define, 120 beats per minute is assumed.
 
     // m.SetTime( t ); // do'nt need, because previous time is not changed
     m.SetTempo( tempo );

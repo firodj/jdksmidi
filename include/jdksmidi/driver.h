@@ -73,7 +73,7 @@ namespace jdksmidi
 class MIDIDriver : public MIDITick
 {
 
-  public:
+public:
 
     /// The constructor. It allocates memory for the MIDI queues, and set to NULL the pointers to in, thru and out
     /// processors
@@ -172,10 +172,10 @@ class MIDIDriver : public MIDITick
     virtual bool HardwareMsgIn( MIDITimedBigMessage &msg );
 
     /* NEW BY NC:
-  * NOTE: In order to develop MIDI driver classes for other OS than Windows I started to
-  * integrate older MIDIDriverWin32 methods into the base class, giving them as pure virtual. So
-  * now every subclass of a MIDIDriver must implement these.
-  */
+    * NOTE: In order to develop MIDI driver classes for other OS than Windows I started to
+    * integrate older MIDIDriverWin32 methods into the base class, giving them as pure virtual. So
+    * now every subclass of a MIDIDriver must implement these.
+    */
 
     /// Opens the MIDI in port _id_
     virtual bool OpenMIDIInPort( int id );
@@ -230,9 +230,9 @@ class MIDIDriver : public MIDITick
     static unsigned long GetSystemTime();
 
     static const int DEFAULT_TIMER_RESOLUTION = 1; ///< The default timer resolution is 1 msec
-                                                   // public: used by AdvancedSequencer
+    // public: used by AdvancedSequencer
 
-  protected:
+protected:
 
     RtMidiIn *m_pMidiIn;         ///< The RtMidi abstraction for the MIDI in port
     RtMidiOut *m_pMidiOut;       ///< The RtMidi abstraction for the MIDI out port

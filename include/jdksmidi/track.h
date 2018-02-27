@@ -63,12 +63,12 @@ namespace jdksmidi
 enum
 {
     INSMODE_DEFAULT, ///< follow the default behaviour (only used as default argument in methods MIDITrack::InsertEvent() and
-                     ///MIDITrack::InsertNote()
+    ///MIDITrack::InsertNote()
     INSMODE_INSERT,  ///< always insert events, if a same kind event was found  duplicate it.
     INSMODE_REPLACE, ///< replace if a same kind event was found, otherwise do nothing.
     INSMODE_INSERT_OR_REPLACE,         ///< replace if a same kind event was found, otherwise insert.
     INSMODE_INSERT_OR_REPLACE_BUT_NOTE ///< as above, but allow two same note events at same time (don't replace, insert a new
-                                       ///note).
+    ///note).
 };
 
 /// Defines the behaviour of the method MIDITrack::FindEventNunber() when searching events.
@@ -96,7 +96,7 @@ const int MIDITrackChunkSize = 512;
 
 class MIDITrackChunk
 {
-  public:
+public:
 
     /// Returns the address of the MIDITimedBigMessage referred to by *event_num*
     /// @param event_num an integer specifying an event number in the range 0 to MIDITrackChunkSize
@@ -108,9 +108,9 @@ class MIDITrackChunk
     /// @returns The non-const pointer to the requested event.
     MIDITimedBigMessage *GetEventAddress( int event_num );
 
-  protected:
+protected:
 
-  private:
+private:
     MIDITimedBigMessage buf[MIDITrackChunkSize];
 };
 
@@ -131,7 +131,7 @@ const int MIDIChunksPerTrack = 512;
 
 class MIDITrack
 {
-  public:
+public:
 
     /// Construct a MIDITrack object with the specified number of events
     /// @param size The number of events, defaults to 0
@@ -372,7 +372,7 @@ class MIDITrack
     /// corresponding off events are properly managed.
     void CloseOpenEvents( MIDIClockTime t );
 
-  private:
+private:
 
     // void  QSort( int left, int right );
 

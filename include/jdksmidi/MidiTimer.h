@@ -20,7 +20,7 @@ namespace CFugue
 ///<Summary>Plays the role of a pseudo MIDI Timer for MIDI Sequencer</Summary>
 class MidiTimer
 {
-  public:
+public:
     typedef std::chrono::steady_clock::time_point TimePoint;
     typedef std::chrono::milliseconds Duration;
 

@@ -169,7 +169,7 @@ namespace jdksmidi
 
 class MIDICue
 {
-  public:
+public:
     MIDICue ( const MIDICue &c )   : v1 ( c.v1 ), v2 ( c.v2 ), v3 ( c.v3 ), num_values ( c.num_values )
     {
     }
@@ -290,7 +290,7 @@ class MIDICue
         v3 = a;
     }
 
-  protected:
+protected:
     ulong v1, v2, v3;
     int num_values;
 };
@@ -371,7 +371,7 @@ enum MIDIShowCommand
 
 class MIDIShowControlPacket
 {
-  public:
+public:
     MIDIShowControlPacket();
 
     void Put_Go()
@@ -742,7 +742,7 @@ class MIDIShowControlPacket
     bool ParseEntireSysEx( const MIDISystemExclusive *e );
     bool StoreToSysEx( MIDISystemExclusive *e ) const;
 
-  protected:
+protected:
     bool StoreTime( MIDISystemExclusive *e ) const;
     bool ParseTime( const MIDISystemExclusive *e, int *pos );
     bool Store3Param( MIDISystemExclusive *e ) const;

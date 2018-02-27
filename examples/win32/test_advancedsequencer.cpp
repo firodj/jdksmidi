@@ -42,7 +42,7 @@ string command_buf, command, par1, par2; // used by GetCommand() for parsing the
 AdvancedSequencer sequencer;             // an AdvancedSequencer (without GUI notifier)
 
 const char helpstring[] =
-"\nAvailable commands:\n\
+    "\nAvailable commands:\n\
    load filename       : Loads the file into the sequencer\n\
    ports               : Enumerates MIDI In and OUT ports\n\
    outport port        : Sets port as current output device\n\
@@ -166,7 +166,8 @@ void DumpMIDIMultiTrack( MIDIMultiTrack *mlt )
             system( "PAUSE" );
             num_lines = 0;
         }
-    } while ( i.GoToNextEvent() );
+    }
+    while ( i.GoToNextEvent() );
 }
 
 int main( int argc, char **argv )

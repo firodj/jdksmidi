@@ -128,7 +128,8 @@ bool MIDITrack::SetEndTime( MIDIClockTime time )
     if ( IsTrackEnded() )
     {
         if ( num_events > 1 && GetEvent( num_events - 2 )->GetTime() > time )
-        { // we are trying to insert an EOT before last event
+        {
+            // we are trying to insert an EOT before last event
             return false;
         }
         GetLastEvent()->SetTime( time );
@@ -136,7 +137,8 @@ bool MIDITrack::SetEndTime( MIDIClockTime time )
     else
     {
         if ( num_events > 0 && GetEvent( num_events - 1 )->GetTime() > time )
-        { // as above
+        {
+            // as above
             return false;
         }
         MIDITimedBigMessage msg;
@@ -417,7 +419,8 @@ bool MIDITrack::InsertEvent( const MIDITimedBigMessage &msg, int _ins_mode )
     }
 
     if ( GetLastEventTime() < msg.GetTime() )
-    {                                           // insert as last event
+    {
+        // insert as last event
         SetEndTime( msg.GetTime() );            // adjust DATA_END
         return PutEvent( msg, num_events - 1 ); // insert just before DATA_END
     }
@@ -441,7 +444,8 @@ bool MIDITrack::InsertEvent( const MIDITimedBigMessage &msg, int _ins_mode )
 
     case INSMODE_REPLACE: // replace a same kind event, or do nothing
         while ( event_num < num_events && GetEvent( event_num )->GetTime() == msg.GetTime() )
-        { // search for a same kind event
+        {
+            // search for a same kind event
             if ( MIDITimedBigMessage::IsSameKind( *GetEvent( event_num ), msg ) )
             {
                 ret = SetEvent( event_num, msg ); // replace if found
@@ -456,7 +460,7 @@ bool MIDITrack::InsertEvent( const MIDITimedBigMessage &msg, int _ins_mode )
         while ( event_num < num_events && GetEvent( event_num )->GetTime() == msg.GetTime() )
         {
             if ( MIDITimedBigMessage::IsSameKind( *GetEvent( event_num ), msg )
-                 && ( _ins_mode == INSMODE_INSERT_OR_REPLACE || !msg.IsNote() ) )
+                    && ( _ins_mode == INSMODE_INSERT_OR_REPLACE || !msg.IsNote() ) )
             {
                 ret = SetEvent( event_num, msg ); // replace if found
                 break;
@@ -505,7 +509,8 @@ bool MIDITrack::InsertNote( const MIDITimedBigMessage &msg, MIDIClockTime len, i
 
     case INSMODE_REPLACE: // replace a same kind event, or do nothing
         if ( FindEventNumber( msg, &event_num, COMPMODE_SAMEKIND ) )
-        {                                    // search for a note on event (with same note)
+        {
+            // search for a note on event (with same note)
             RemoveEvent( event_num );        // remove it
             while ( event_num < num_events ) // search for the note off
             {
@@ -524,7 +529,8 @@ bool MIDITrack::InsertNote( const MIDITimedBigMessage &msg, MIDIClockTime len, i
 
     case INSMODE_INSERT_OR_REPLACE: // replace a same kind, or insert
         if ( FindEventNumber( msg, &event_num, COMPMODE_SAMEKIND ) )
-        {                                    // search for a note on event (with same note)
+        {
+            // search for a note on event (with same note)
             RemoveEvent( event_num );        // remove it
             while ( event_num < num_events ) // search for the note off
             {
@@ -1023,9 +1029,11 @@ void MIDITrack::CloseOpenEvents( MIDIClockTime t )
     {
         int note_count = matrix.GetChannelCount( ch ); // get the number of notes on of the channel
         for ( int note = 0; note < 0x7f && note_count > 0; note++ )
-        { // search which notes are on
+        {
+            // search which notes are on
             for ( int i = matrix.GetNoteCount( ch, note ); i > 0; i-- )
-            { // if the note is on ... (i should normally be 1)
+            {
+                // if the note is on ... (i should normally be 1)
                 msg.SetNoteOff( ch, note, 0 );
                 msg.SetTime( t );
                 InsertEvent( msg ); // ... insert a note off at time t

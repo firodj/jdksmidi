@@ -69,7 +69,8 @@ const char GMpatches[][128]
        "112-Tinkle Bell",            "113-Agogo",                  "114-Steel Drums",           "115-Woodblock",
        "116-Taiko Drum",             "117-Melodic Tom",            "118-Synth Drum",            "119-Reverse Cymbal",
        "120-Guitar Fret Noise",      "121-Breath Noise",           "122-Seashore",              "123-Bird Tweet",
-       "124-Telephone Ring",         "125-Helicopter",             "126-Applause",              "127-Gunshot"};
+       "124-Telephone Ring",         "125-Helicopter",             "126-Applause",              "127-Gunshot"
+      };
 
 const char GMDrumKits[][128]
     = {"0-Standard Kit",        "1-",                 "2-",                "3-",                "4-",
@@ -97,7 +98,8 @@ const char GMDrumKits[][128]
        "110-Fiddle",            "111-Shanai",         "112-Tinkle Bell",   "113-Agogo",         "114-Steel Drums",
        "115-Woodblock",         "116-Taiko Drum",     "117-Melodic Tom",   "118-Synth Drum",    "119-Reverse Cymbal",
        "120-Guitar Fret Noise", "121-Breath Noise",   "122-Seashore",      "123-Bird Tweet",    "124-Telephone Ring",
-       "125-Helicopter",        "126-Applause",       "127-Gunshot"};
+       "125-Helicopter",        "126-Applause",       "127-Gunshot"
+      };
 
 /*  Declare Windows procedure  */
 LRESULT CALLBACK WindowProcedure( HWND, UINT, WPARAM, LPARAM );

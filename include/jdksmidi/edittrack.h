@@ -43,7 +43,7 @@ namespace jdksmidi
 
 class MIDIEditTrackEventMatcher
 {
-  public:
+public:
     MIDIEditTrackEventMatcher();
     virtual ~MIDIEditTrackEventMatcher();
 
@@ -52,7 +52,7 @@ class MIDIEditTrackEventMatcher
 
 class MIDIEditTrack
 {
-  public:
+public:
     MIDIEditTrack( MIDITrack *track_ );
     virtual ~MIDIEditTrack();
 
@@ -97,12 +97,12 @@ class MIDIEditTrack
     //
     void Shift( signed long offset, MIDIEditTrackEventMatcher *match = 0 );
 
-  protected:
+protected:
 
     MIDIMatrix matrix;
     MIDITrack *track;
 
-  private:
+private:
 };
 }
 

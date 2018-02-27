@@ -58,7 +58,7 @@ class MIDIFileWrite;
 /// to be be written to a MIDI file
 class MIDIFileWriteStream
 {
-  public:
+public:
     MIDIFileWriteStream();
     virtual ~MIDIFileWriteStream();
 
@@ -76,7 +76,7 @@ class MIDIFileWriteStream
 // TODO: fix this
 class MIDIFileWriteStreamFile : public MIDIFileWriteStream
 {
-  public:
+public:
     /// In the constructor you must specify an already opened FILE f
     MIDIFileWriteStreamFile( FILE *f_ );
 
@@ -86,7 +86,7 @@ class MIDIFileWriteStreamFile : public MIDIFileWriteStream
     long Seek( long pos, int whence = SEEK_SET );
     int WriteChar( int c );
 
-  protected:
+protected:
     FILE *f;
 };
 
@@ -94,7 +94,7 @@ class MIDIFileWriteStreamFile : public MIDIFileWriteStream
 /// a stream of *char* to a FILE C object specified by its filename
 class MIDIFileWriteStreamFileName : public MIDIFileWriteStreamFile
 {
-  public:
+public:
 
     /// In the constructor you must specify the filename.\ The constructor tries to open the FILE, you
     /// should call IsValid() for checking if it was successful
@@ -128,7 +128,7 @@ class MIDIFileWriteStreamFileName : public MIDIFileWriteStreamFile
 /// writing them to a MIDIFileWriteStream object
 class MIDIFileWrite : protected MIDIFile
 {
-  public:
+public:
     /// In the constructor you must specify the MIDIFileWriteStream.\ The stream must be alreafy opem
     MIDIFileWrite( MIDIFileWriteStream *out_stream_ );
 
@@ -195,7 +195,7 @@ class MIDIFileWrite : protected MIDIFile
         use_running_status = use;
     }
 
-  protected:
+protected:
     virtual void Error( const char *s );
 
     void WriteCharacter( uchar c )
@@ -222,7 +222,7 @@ class MIDIFileWrite : protected MIDIFile
     int WriteVariableNum( unsigned long n );
     void WriteDeltaTime( unsigned long time );
 
-  private:
+private:
     bool use_running_status; // true on default
     bool error;
     bool within_track;

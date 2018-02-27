@@ -95,7 +95,8 @@ void DumpMIDIMultiTrack( MIDIMultiTrack *mlt )
             fprintf( stdout, "#%2d - ", trk_num );
             DumpMIDITimedBigMessage( msg );
         }
-    } while ( i.GoToNextEvent() );
+    }
+    while ( i.GoToNextEvent() );
 }
 
 int main( int argc, char **argv )

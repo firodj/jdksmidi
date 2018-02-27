@@ -27,12 +27,12 @@
 namespace jdksmidi
 {
 MIDIDriverAlsa::MIDIDriverAlsa ( const char* szClientName, int queue_size )
-		:
-		MIDIDriver ( queue_size ),
-		m_pMidiIn ( 0 ),
-		m_pMidiOut ( 0 ),
-		m_pThread ( NULL ),
-		m_strClientName(szClientName)
+    :
+    MIDIDriver ( queue_size ),
+    m_pMidiIn ( 0 ),
+    m_pMidiOut ( 0 ),
+    m_pThread ( NULL ),
+    m_strClientName(szClientName)
 {
     if ( szClientName == NULL ) // user did not supply any name for this driver client
     {

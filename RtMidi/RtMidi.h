@@ -62,7 +62,7 @@
 
 class RtMidiError : public std::exception
 {
-  public:
+public:
     //! Defined RtMidiError types.
     enum Type
     {
@@ -115,7 +115,7 @@ class RtMidiError : public std::exception
         return message_.c_str();
     }
 
-  protected:
+protected:
     std::string message_;
     Type type_;
 };
@@ -134,7 +134,7 @@ class MidiApi;
 
 class RtMidi
 {
-  public:
+public:
 
     //! MIDI API specifier arguments.
     enum Api
@@ -183,7 +183,7 @@ class RtMidi
     */
     virtual void setErrorCallback( RtMidiErrorCallback errorCallback = NULL ) = 0;
 
-  protected:
+protected:
 
     RtMidi();
     virtual ~RtMidi();
@@ -225,7 +225,7 @@ class RtMidi
 
 class RtMidiIn : public RtMidi
 {
-  public:
+public:
 
     //! User callback function type definition.
     typedef void ( *RtMidiCallback )( double timeStamp, std::vector<unsigned char> *message, void *userData );
@@ -345,7 +345,7 @@ class RtMidiIn : public RtMidi
     */
     virtual void setErrorCallback( RtMidiErrorCallback errorCallback = NULL );
 
-  protected:
+protected:
     void openMidiApi( RtMidi::Api api, const std::string clientName, unsigned int queueSizeLimit );
 };
 
@@ -367,7 +367,7 @@ class RtMidiIn : public RtMidi
 
 class RtMidiOut : public RtMidi
 {
-  public:
+public:
 
     //! Default constructor that allows an optional client name.
     /*!
@@ -434,7 +434,7 @@ class RtMidiOut : public RtMidi
     */
     virtual void setErrorCallback( RtMidiErrorCallback errorCallback = NULL );
 
-  protected:
+protected:
     void openMidiApi( RtMidi::Api api, const std::string clientName );
 };
 
@@ -453,7 +453,7 @@ class RtMidiOut : public RtMidi
 
 class MidiApi
 {
-  public:
+public:
 
     MidiApi();
     virtual ~MidiApi();
@@ -474,7 +474,7 @@ class MidiApi
     //! A basic error reporting function for RtMidi classes.
     void error( RtMidiError::Type type, std::string errorString );
 
-  protected:
+protected:
     virtual void initialize( const std::string &clientName ) = 0;
 
     void *apiData_;
@@ -485,7 +485,7 @@ class MidiApi
 
 class MidiInApi : public MidiApi
 {
-  public:
+public:
 
     MidiInApi( unsigned int queueSizeLimit );
     virtual ~MidiInApi( void );
@@ -519,7 +519,7 @@ class MidiInApi : public MidiApi
 
         // Default constructor.
         MidiQueue()
-  :front(0), back(0), size(0), ringSize(0)
+            :front(0), back(0), size(0), ringSize(0)
         {
         }
     };
@@ -541,20 +541,20 @@ class MidiInApi : public MidiApi
 
         // Default constructor.
         RtMidiInData()
-  : ignoreFlags(7), doInput(false), firstMessage(true),
-      apiData(0), usingCallback(false), userCallback(0), userData(0),
-      continueSysex(false)
+            : ignoreFlags(7), doInput(false), firstMessage(true),
+              apiData(0), usingCallback(false), userCallback(0), userData(0),
+              continueSysex(false)
         {
         }
     };
 
-  protected:
+protected:
     RtMidiInData inputData_;
 };
 
 class MidiOutApi : public MidiApi
 {
-  public:
+public:
 
     MidiOutApi( void );
     virtual ~MidiOutApi( void );
@@ -667,7 +667,7 @@ inline void RtMidiOut::setErrorCallback( RtMidiErrorCallback errorCallback )
 
 class MidiInCore : public MidiInApi
 {
-  public:
+public:
     MidiInCore( const std::string clientName, unsigned int queueSizeLimit );
     ~MidiInCore( void );
     RtMidi::Api getCurrentApi( void )
@@ -681,13 +681,13 @@ class MidiInCore : public MidiInApi
     unsigned int getPortCount( void );
     std::string getPortName( unsigned int portNumber );
 
-  protected:
+protected:
     void initialize( const std::string &clientName );
 };
 
 class MidiOutCore : public MidiOutApi
 {
-  public:
+public:
     MidiOutCore( const std::string clientName );
     ~MidiOutCore( void );
     RtMidi::Api getCurrentApi( void )
@@ -702,7 +702,7 @@ class MidiOutCore : public MidiOutApi
     std::string getPortName( unsigned int portNumber );
     void sendMessage( std::vector<unsigned char> *message );
 
-  protected:
+protected:
     void initialize( const std::string &clientName );
 };
 
@@ -712,7 +712,7 @@ class MidiOutCore : public MidiOutApi
 
 class MidiInJack : public MidiInApi
 {
-  public:
+public:
     MidiInJack( const std::string clientName, unsigned int queueSizeLimit );
     ~MidiInJack( void );
     RtMidi::Api getCurrentApi( void )
@@ -726,7 +726,7 @@ class MidiInJack : public MidiInApi
     unsigned int getPortCount( void );
     std::string getPortName( unsigned int portNumber );
 
-  protected:
+protected:
     std::string clientName;
 
     void connect( void );
@@ -735,7 +735,7 @@ class MidiInJack : public MidiInApi
 
 class MidiOutJack : public MidiOutApi
 {
-  public:
+public:
     MidiOutJack( const std::string clientName );
     ~MidiOutJack( void );
     RtMidi::Api getCurrentApi( void )
@@ -750,7 +750,7 @@ class MidiOutJack : public MidiOutApi
     std::string getPortName( unsigned int portNumber );
     void sendMessage( std::vector<unsigned char> *message );
 
-  protected:
+protected:
     std::string clientName;
 
     void connect( void );
@@ -763,7 +763,7 @@ class MidiOutJack : public MidiOutApi
 
 class MidiInAlsa : public MidiInApi
 {
-  public:
+public:
     MidiInAlsa( const std::string clientName, unsigned int queueSizeLimit );
     ~MidiInAlsa( void );
     RtMidi::Api getCurrentApi( void )
@@ -777,13 +777,13 @@ class MidiInAlsa : public MidiInApi
     unsigned int getPortCount( void );
     std::string getPortName( unsigned int portNumber );
 
-  protected:
+protected:
     void initialize( const std::string &clientName );
 };
 
 class MidiOutAlsa : public MidiOutApi
 {
-  public:
+public:
     MidiOutAlsa( const std::string clientName );
     ~MidiOutAlsa( void );
     RtMidi::Api getCurrentApi( void )
@@ -798,7 +798,7 @@ class MidiOutAlsa : public MidiOutApi
     std::string getPortName( unsigned int portNumber );
     void sendMessage( std::vector<unsigned char> *message );
 
-  protected:
+protected:
     void initialize( const std::string &clientName );
 };
 
@@ -808,7 +808,7 @@ class MidiOutAlsa : public MidiOutApi
 
 class MidiInWinMM : public MidiInApi
 {
-  public:
+public:
     MidiInWinMM( const std::string clientName, unsigned int queueSizeLimit );
     ~MidiInWinMM( void );
     RtMidi::Api getCurrentApi( void )
@@ -822,13 +822,13 @@ class MidiInWinMM : public MidiInApi
     unsigned int getPortCount( void );
     std::string getPortName( unsigned int portNumber );
 
-  protected:
+protected:
     void initialize( const std::string &clientName );
 };
 
 class MidiOutWinMM : public MidiOutApi
 {
-  public:
+public:
     MidiOutWinMM( const std::string clientName );
     ~MidiOutWinMM( void );
     RtMidi::Api getCurrentApi( void )
@@ -843,7 +843,7 @@ class MidiOutWinMM : public MidiOutApi
     std::string getPortName( unsigned int portNumber );
     void sendMessage( std::vector<unsigned char> *message );
 
-  protected:
+protected:
     void initialize( const std::string &clientName );
 };
 
@@ -853,7 +853,7 @@ class MidiOutWinMM : public MidiOutApi
 
 class MidiInDummy : public MidiInApi
 {
-  public:
+public:
     MidiInDummy( const std::string /*clientName*/, unsigned int queueSizeLimit ) : MidiInApi( queueSizeLimit )
     {
         errorString_ = "MidiInDummy: This class provides no functionality.";
@@ -881,7 +881,7 @@ class MidiInDummy : public MidiInApi
         return "";
     }
 
-  protected:
+protected:
     void initialize( const std::string & /*clientName*/ )
     {
     }
@@ -889,7 +889,7 @@ class MidiInDummy : public MidiInApi
 
 class MidiOutDummy : public MidiOutApi
 {
-  public:
+public:
     MidiOutDummy( const std::string /*clientName*/ )
     {
         errorString_ = "MidiOutDummy: This class provides no functionality.";
@@ -920,7 +920,7 @@ class MidiOutDummy : public MidiOutApi
     {
     }
 
-  protected:
+protected:
     void initialize( const std::string & /*clientName*/ )
     {
     }

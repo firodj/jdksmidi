@@ -48,7 +48,7 @@ enum MIDIAccidentalType
 
 class MIDIKeySignature
 {
-  public:
+public:
 
     MIDIKeySignature();
     MIDIKeySignature( const MIDIKeySignature &k );
@@ -79,7 +79,7 @@ class MIDIKeySignature
 
     bool ConvertMIDINote( int in_note, int *out_note );
 
-  protected:
+protected:
 
     bool ProcessWhiteNote( int in_note, int *out_note );
     bool ProcessBlackNote( int in_note, int *out_note );

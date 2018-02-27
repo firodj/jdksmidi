@@ -60,7 +60,7 @@ const unsigned long _MTrk = OSTYPE( 'M', 'T', 'r', 'k' );
 
 class MIDIFile
 {
-  public:
+public:
 
     MIDIFile();
     virtual ~MIDIFile();

@@ -63,7 +63,7 @@ const char *MIDIMessage::chan_msg_name[16] = {"CHANNEL MSG  ERROR 0x00", // 0x00
                                               "CHAN PRES.  ",            // 0xD0
                                               "BENDER      ",            // 0xE0
                                               "CHANNEL MSG  ERROR 0xF0"  // 0xF0
-};
+                                             };
 
 const char *MIDIMessage::sys_msg_name[16] = {"SYSTEM MSG   SYSEX-N     ", // 0xF0
                                              "SYSTEM MSG   MTC         ", // 0xF1
@@ -81,14 +81,14 @@ const char *MIDIMessage::sys_msg_name[16] = {"SYSTEM MSG   SYSEX-N     ", // 0xF
                                              "SYSTEM MSG   ERROR 0xFD  ", // 0xFD
                                              "SYSTEM MSG   SENSE       ", // 0xFE
                                              "SYSTEM MSG   META-EVENT  "  // 0xFF
-};
+                                            };
 
 const char *MIDIMessage::service_msg_name[] = {"SERVICE  ERROR NOT SERVICE",    // NOT_SERVICE = 0,
                                                "SERVICE  BEAT MARKER",          // SERVICE_BEAT_MARKER = 1,
                                                "SERVICE  NO OPERATION",         // SERVICE_NO_OPERATION = 2,
                                                "SERVICE  USERAPP MARKER",       // SERVICE_USERAPP_MARKER = 3,
                                                "SERVICE  ERROR INVALID SERVICE" // OUT_OF_RANGE_SERVICE_NUM = 4
-};
+                                              };
 
 const char *MIDIMessage::MsgToText( char *txt ) const
 {
@@ -681,11 +681,11 @@ int MIDITimedMessage::CompareEvents( const MIDITimedMessage &m1, const MIDITimed
     // if times are the same, a note off is always larger
 
     if ( m1.byte1 == m2.byte1 && m1.GetStatus() == NOTE_ON
-         && ( ( m2.GetStatus() == NOTE_ON && m2.byte2 == 0 ) || ( m2.GetStatus() == NOTE_OFF ) ) )
+            && ( ( m2.GetStatus() == NOTE_ON && m2.byte2 == 0 ) || ( m2.GetStatus() == NOTE_OFF ) ) )
         return 2; // m2 is larger
 
     if ( m1.byte1 == m2.byte1 && m2.GetStatus() == NOTE_ON
-         && ( ( m1.GetStatus() == NOTE_ON && m1.byte2 == 0 ) || ( m1.GetStatus() == NOTE_OFF ) ) )
+            && ( ( m1.GetStatus() == NOTE_ON && m1.byte2 == 0 ) || ( m1.GetStatus() == NOTE_OFF ) ) )
         return 1; // m1 is larger
 
     return 0; // both are equal.
@@ -848,11 +848,11 @@ int MIDITimedBigMessage::CompareEvents( const MIDITimedBigMessage &m1, const MID
     // if times are the same, a note off is always larger
 
     if ( m1.byte1 == m2.byte1 && m1.GetStatus() == NOTE_ON
-         && ( ( m2.GetStatus() == NOTE_ON && m2.byte2 == 0 ) || ( m2.GetStatus() == NOTE_OFF ) ) )
+            && ( ( m2.GetStatus() == NOTE_ON && m2.byte2 == 0 ) || ( m2.GetStatus() == NOTE_OFF ) ) )
         return 2; // m2 is larger
 
     if ( m1.byte1 == m2.byte1 && m2.GetStatus() == NOTE_ON
-         && ( ( m1.GetStatus() == NOTE_ON && m1.byte2 == 0 ) || ( m1.GetStatus() == NOTE_OFF ) ) )
+            && ( ( m1.GetStatus() == NOTE_ON && m1.byte2 == 0 ) || ( m1.GetStatus() == NOTE_OFF ) ) )
         return 1; // m1 is larger
 
     return 0; // both are equal.

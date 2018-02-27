@@ -123,7 +123,7 @@ inline long GetSampleRateFrequencyLong( SAMPLE_RATE r )
 
 class SMPTE
 {
-  public:
+public:
 
     /// The constructor sets the SMPTE rate to SMPTE_30 and the sample rate to SAMPLE_48000
     SMPTE( SMPTE_RATE smpte_rate = SMPTE_RATE_30, SAMPLE_RATE sample_rate = SAMPLE_48000 );
@@ -376,7 +376,7 @@ class SMPTE
     }
     //@}
 
-  protected:
+protected:
 
     /// Performs samples-to-smpte conversion
     void SampleToTime();
@@ -399,7 +399,7 @@ class SMPTE
         return GetSMPTERateFrequencyLong( smpte_rate );
     }
 
-  private:
+private:
     SMPTE_RATE smpte_rate;
     SAMPLE_RATE sample_rate;
     ulong sample_number;

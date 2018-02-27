@@ -49,7 +49,7 @@ namespace jdksmidi
 class MIDISequencerGUIEventNotifierWin32 : public MIDISequencerGUIEventNotifier
 {
 
-  public:
+public:
 
     /// The first form of the constructor.
     /// \param w the windows handle to which send messages
@@ -90,7 +90,7 @@ class MIDISequencerGUIEventNotifierWin32 : public MIDISequencerGUIEventNotifier
         en = f;
     }
 
-  private:
+private:
 
     /* NEW BY NC */
     // returns a safe windows message id, so we can create the notifier without worrying about this
@@ -121,7 +121,7 @@ class MIDISequencerGUIEventNotifierWin32 : public MIDISequencerGUIEventNotifier
 class MIDIDriverWin32 : public MIDIDriver
 {
 
-  public:
+public:
 
     /// The constructor. The queue size should be adeguate, you can increase if you get missing events.
     MIDIDriverWin32( int queue_size = DEFAULT_QUEUE_SIZE );
@@ -157,7 +157,7 @@ class MIDIDriverWin32 : public MIDIDriver
     //    /// Sends the MIDITimedBigMessage _msg_ to the open MIDI out port
     //    virtual bool HardwareMsgOut ( const MIDITimedBigMessage &msg );
 
-  protected:
+protected:
 
     static const int DEFAULT_IN_PORT = MIDI_MAPPER;  ///< The default in port
     static const int DEFAULT_OUT_PORT = MIDI_MAPPER; ///< The default out port

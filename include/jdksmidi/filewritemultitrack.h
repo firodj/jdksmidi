@@ -37,7 +37,7 @@ namespace jdksmidi
 
 class MIDIFileWriteMultiTrack
 {
-  public:
+public:
 
     MIDIFileWriteMultiTrack( const MIDIMultiTrack *mlt_, MIDIFileWriteStream *strm_ );
 
@@ -60,7 +60,7 @@ class MIDIFileWriteMultiTrack
         writer.UseRunningStatus( use );
     }
 
-  private:
+private:
     virtual bool PreWrite();
     virtual bool PostWrite();
 

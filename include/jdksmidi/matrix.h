@@ -48,7 +48,7 @@ namespace jdksmidi
 /// It is used by MIDIDriver and MIDISequencerTrackState
 class MIDIMatrix
 {
-  public:
+public:
 
     /// The constructor creates an empty matrix
     MIDIMatrix();
@@ -86,7 +86,7 @@ class MIDIMatrix
         return hold_pedal[channel];
     }
 
-  protected:
+protected:
 
     /// Decrements the note count (currently _m_ is ignored)
     virtual void DecNoteCount( const MIDIMessage &m, int channel, int note );
@@ -112,7 +112,7 @@ class MIDIMatrix
         channel_count[chan] = val;
     }
 
-  private:
+private:
     unsigned char note_on_count[16][128];
     int channel_count[16];
     bool hold_pedal[16];

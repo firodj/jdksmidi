@@ -328,7 +328,8 @@ int MIDIFileRead::ReadMT( unsigned long type, int skip )
 
                 if ( abort_parse )
                     return false;
-            } while ( c != -1 );
+            }
+            while ( c != -1 );
         }
 
         mf_error( "Error looking for chunk type" );
@@ -393,7 +394,7 @@ void MIDIFileRead::ReadTrack()
                               0, 0, 0, // 0x00 through 0x70
                               2, 2, 2, 2, 1,
                               1, 2, 0 // 0x80 through 0xF0
-    };
+                             };
     unsigned long lookfor, lng;
     int c, c1, type;
     int running = 0; // 1 when running status used
@@ -518,7 +519,8 @@ unsigned long MIDIFileRead::ReadVariableNum()
         {
             c = EGetC();
             value = ( value << 7 ) + ( c & 0x7f );
-        } while ( c & 0x80 );
+        }
+        while ( c & 0x80 );
     }
 
     return value;

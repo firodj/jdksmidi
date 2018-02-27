@@ -2,7 +2,7 @@
   VRM Music Generator  based on  libJDKSmidi C++ MIDI Library
 */
 const char *version = "1.23"; // from February 2011
-                              /*
+/*
 Copyright (C) 2010 V.R.Madgazin
 www.vmgames.com
 vrm@vmgames.com
@@ -110,7 +110,7 @@ MIDIClockTime mctime( double seconds )
 
 const int MAX_INDEX = 70;
 int notes_table[MAX_INDEX + 1] = // notes number array: all "white" notes in 10 octaves
-    {0, 2, 4, 5, 7, 9, 11, 12, };
+{0, 2, 4, 5, 7, 9, 11, 12, };
 // 0  1  2  3  4  5  6   7  index
 // C  D  E  F  G  A  B   C  notes
 void setup_notes()
@@ -135,7 +135,7 @@ int main( int argc, char **argv )
     int discrete_time = 1;    // [-di] switch for discretization of all time intervals in note duration unit
     int channel = 1;          // [-ch] channel number (1...16), 1 for melodic instruments, 10 for percussion instruments
     double music_dur = 43;    // [-md] total music duration in seconds (approximately)
-                              // делим всё время music_dur на отрезки section_dur, чтобы не было слишком больших и малых плотностей нот,
+    // делим всё время music_dur на отрезки section_dur, чтобы не было слишком больших и малых плотностей нот,
     // а также чтобы при увеличении только одного параметра music_dur не менялись предыдущие отрезки музыки!
     double section_dur = 1;     // [-sd] temporal section of music in seconds
     double note_dur = 0.5;      // [-nd] note duration in seconds
@@ -196,7 +196,7 @@ int main( int argc, char **argv )
 
     MIDIMultiTrack tracks( 1 ); // the object which will hold all the tracks
     const int trk = 0,          // track number
-        velocity = 100;
+              velocity = 100;
 
     string text = "\n" + string( Program ) + "\nversion " + string( version ) + "  " + string( Copyright ) + "\n";
     tracks.GetTrack( trk )->PutTextEvent( 0, META_GENERIC_TEXT, text.c_str() );

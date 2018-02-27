@@ -39,7 +39,7 @@ namespace jdksmidi
 
 class MIDITick
 {
-  public:
+public:
     MIDITick()
     {
     }

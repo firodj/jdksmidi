@@ -43,7 +43,7 @@ namespace jdksmidi
 
 class MIDIQueue
 {
-  public:
+public:
 
     /// The constructor creates a queue of size _num_msgs_
     MIDIQueue( int num_msgs );
@@ -91,7 +91,7 @@ class MIDIQueue
         return &buf[next_out];
     }
 
-  protected:
+protected:
     MIDITimedBigMessage *buf; ///< The array of MIDI messages
     int bufsize;              ///< The size of the array
     volatile int next_in;     ///< The next free index for putting messages

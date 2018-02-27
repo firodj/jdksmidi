@@ -32,7 +32,7 @@ namespace jdksmidi
 
 class MIDISCHandle
 {
-  public:
+public:
     MIDISCHandle();
     virtual ~MIDISCHandle();
 

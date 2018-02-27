@@ -231,7 +231,7 @@ RtMidiOut::~RtMidiOut() throw()
 //*********************************************************************//
 
 MidiApi :: MidiApi( void )
-  : apiData_( 0 ), connected_( false ), errorCallback_(0)
+    : apiData_( 0 ), connected_( false ), errorCallback_(0)
 {
 }
 
@@ -455,7 +455,8 @@ static void midiInputCallback( const MIDIPacketList *list, void *procRef, void *
         {
             time = packet->timeStamp;
             if ( time == 0 )
-            { // this happens when receiving asynchronous sysex messages
+            {
+                // this happens when receiving asynchronous sysex messages
                 time = AudioGetCurrentHostTime();
             }
             time -= apiData->lastTime;
@@ -465,7 +466,8 @@ static void midiInputCallback( const MIDIPacketList *list, void *procRef, void *
         }
         apiData->lastTime = packet->timeStamp;
         if ( apiData->lastTime == 0 )
-        { // this happens when receiving asynchronous sysex messages
+        {
+            // this happens when receiving asynchronous sysex messages
             apiData->lastTime = AudioGetCurrentHostTime();
         }
         // std::cout << "TimeStamp = " << packet->timeStamp << std::endl;
@@ -622,7 +624,7 @@ void MidiInCore::initialize( const std::string &clientName )
     // Set up our client.
     MIDIClientRef client;
     OSStatus result = MIDIClientCreate(
-        CFStringCreateWithCString( NULL, clientName.c_str(), kCFStringEncodingASCII ), NULL, NULL, &client );
+                          CFStringCreateWithCString( NULL, clientName.c_str(), kCFStringEncodingASCII ), NULL, NULL, &client );
     if ( result != noErr )
     {
         errorString_ = "MidiInCore::initialize: error creating OS-X MIDI client object.";
@@ -715,10 +717,10 @@ void MidiInCore::openVirtualPort( const std::string portName )
     // Create a virtual MIDI input destination.
     MIDIEndpointRef endpoint;
     OSStatus result = MIDIDestinationCreate( data->client,
-                                             CFStringCreateWithCString( NULL, portName.c_str(), kCFStringEncodingASCII ),
-                                             midiInputCallback,
-                                             (void *)&inputData_,
-                                             &endpoint );
+                      CFStringCreateWithCString( NULL, portName.c_str(), kCFStringEncodingASCII ),
+                      midiInputCallback,
+                      (void *)&inputData_,
+                      &endpoint );
     if ( result != noErr )
     {
         errorString_ = "MidiInCore::openVirtualPort: error creating virtual OS-X MIDI destination.";
@@ -858,7 +860,7 @@ static CFStringRef ConnectedEndpointName( MIDIEndpointRef endpoint )
                 if ( err == noErr )
                 {
                     if ( connObjectType == kMIDIObjectType_ExternalSource || connObjectType
-                                                                             == kMIDIObjectType_ExternalDestination )
+                            == kMIDIObjectType_ExternalDestination )
                     {
                         // Connected to an external device's endpoint (10.3 and later).
                         str = EndpointName( ( MIDIEndpointRef )( connObject ), true );
@@ -943,7 +945,7 @@ void MidiOutCore::initialize( const std::string &clientName )
     // Set up our client.
     MIDIClientRef client;
     OSStatus result = MIDIClientCreate(
-        CFStringCreateWithCString( NULL, clientName.c_str(), kCFStringEncodingASCII ), NULL, NULL, &client );
+                          CFStringCreateWithCString( NULL, clientName.c_str(), kCFStringEncodingASCII ), NULL, NULL, &client );
     if ( result != noErr )
     {
         errorString_ = "MidiOutCore::initialize: error creating OS-X MIDI client object.";
@@ -1019,7 +1021,7 @@ void MidiOutCore::openPort( unsigned int portNumber, const std::string portName 
     MIDIPortRef port;
     CoreMidiData *data = static_cast<CoreMidiData *>( apiData_ );
     OSStatus result = MIDIOutputPortCreate(
-        data->client, CFStringCreateWithCString( NULL, portName.c_str(), kCFStringEncodingASCII ), &port );
+                          data->client, CFStringCreateWithCString( NULL, portName.c_str(), kCFStringEncodingASCII ), &port );
     if ( result != noErr )
     {
         MIDIClientDispose( data->client );
@@ -1069,7 +1071,7 @@ void MidiOutCore::openVirtualPort( std::string portName )
     // Create a virtual MIDI output source.
     MIDIEndpointRef endpoint;
     OSStatus result = MIDISourceCreate(
-        data->client, CFStringCreateWithCString( NULL, portName.c_str(), kCFStringEncodingASCII ), &endpoint );
+                          data->client, CFStringCreateWithCString( NULL, portName.c_str(), kCFStringEncodingASCII ), &endpoint );
     if ( result != noErr )
     {
         errorString_ = "MidiOutCore::initialize: error creating OS-X virtual MIDI source.";
@@ -1959,9 +1961,9 @@ void MidiOutAlsa::openPort( unsigned int portNumber, const std::string portName 
     if ( data->vport < 0 )
     {
         data->vport = snd_seq_create_simple_port( data->seq,
-                                                  portName.c_str(),
-                                                  SND_SEQ_PORT_CAP_READ | SND_SEQ_PORT_CAP_SUBS_READ,
-                                                  SND_SEQ_PORT_TYPE_MIDI_GENERIC | SND_SEQ_PORT_TYPE_APPLICATION );
+                      portName.c_str(),
+                      SND_SEQ_PORT_CAP_READ | SND_SEQ_PORT_CAP_SUBS_READ,
+                      SND_SEQ_PORT_TYPE_MIDI_GENERIC | SND_SEQ_PORT_TYPE_APPLICATION );
         if ( data->vport < 0 )
         {
             errorString_ = "MidiOutAlsa::openPort: ALSA error creating output port.";
@@ -2012,9 +2014,9 @@ void MidiOutAlsa::openVirtualPort( std::string portName )
     if ( data->vport < 0 )
     {
         data->vport = snd_seq_create_simple_port( data->seq,
-                                                  portName.c_str(),
-                                                  SND_SEQ_PORT_CAP_READ | SND_SEQ_PORT_CAP_SUBS_READ,
-                                                  SND_SEQ_PORT_TYPE_MIDI_GENERIC | SND_SEQ_PORT_TYPE_APPLICATION );
+                      portName.c_str(),
+                      SND_SEQ_PORT_CAP_READ | SND_SEQ_PORT_CAP_SUBS_READ,
+                      SND_SEQ_PORT_TYPE_MIDI_GENERIC | SND_SEQ_PORT_TYPE_APPLICATION );
 
         if ( data->vport < 0 )
         {
@@ -2117,7 +2119,7 @@ struct WinMidiData
 //*********************************************************************//
 
 static void CALLBACK
-    midiInputCallback( HMIDIIN /*hmin*/, UINT inputStatus, DWORD_PTR instancePtr, DWORD_PTR midiMessage, DWORD timestamp )
+midiInputCallback( HMIDIIN /*hmin*/, UINT inputStatus, DWORD_PTR instancePtr, DWORD_PTR midiMessage, DWORD timestamp )
 {
     if ( inputStatus != MIM_DATA && inputStatus != MIM_LONGDATA && inputStatus != MIM_LONGERROR )
         return;
@@ -2137,7 +2139,8 @@ static void CALLBACK
     apiData->lastTime = timestamp;
 
     if ( inputStatus == MIM_DATA )
-    { // Channel or system message
+    {
+        // Channel or system message
 
         // Make sure the first byte is a status byte.
         unsigned char status = (unsigned char)( midiMessage & 0x000000FF );
@@ -2180,7 +2183,8 @@ static void CALLBACK
             apiData->message.bytes.push_back( *ptr++ );
     }
     else
-    { // Sysex message ( MIM_LONGDATA or MIM_LONGERROR )
+    {
+        // Sysex message ( MIM_LONGDATA or MIM_LONGERROR )
         MIDIHDR *sysex = (MIDIHDR *)midiMessage;
         if ( !( data->ignoreFlags & 0x01 ) && inputStatus != MIM_LONGERROR )
         {
@@ -2305,7 +2309,7 @@ void MidiInWinMM::openPort( unsigned int portNumber, const std::string /*portNam
 
     WinMidiData *data = static_cast<WinMidiData *>( apiData_ );
     MMRESULT result = midiInOpen(
-        &data->inHandle, portNumber, ( DWORD_PTR ) & midiInputCallback, ( DWORD_PTR ) & inputData_, CALLBACK_FUNCTION );
+                          &data->inHandle, portNumber, ( DWORD_PTR ) & midiInputCallback, ( DWORD_PTR ) & inputData_, CALLBACK_FUNCTION );
     if ( result != MMSYSERR_NOERROR )
     {
         errorString_ = "MidiInWinMM::openPort: error creating Windows MM MIDI input port.";
@@ -2415,7 +2419,7 @@ std::string MidiInWinMM::getPortName( unsigned int portNumber )
     int length = WideCharToMultiByte( CP_UTF8, 0, deviceCaps.szPname, -1, NULL, 0, NULL, NULL ) - 1;
     stringName.assign( length, 0 );
     length = WideCharToMultiByte(
-        CP_UTF8, 0, deviceCaps.szPname, static_cast<int>( wcslen( deviceCaps.szPname ) ), &stringName[0], length, NULL, NULL );
+                 CP_UTF8, 0, deviceCaps.szPname, static_cast<int>( wcslen( deviceCaps.szPname ) ), &stringName[0], length, NULL, NULL );
 #else
     stringName = std::string( deviceCaps.szPname );
 #endif
@@ -2492,7 +2496,7 @@ std::string MidiOutWinMM::getPortName( unsigned int portNumber )
     int length = WideCharToMultiByte( CP_UTF8, 0, deviceCaps.szPname, -1, NULL, 0, NULL, NULL ) - 1;
     stringName.assign( length, 0 );
     length = WideCharToMultiByte(
-        CP_UTF8, 0, deviceCaps.szPname, static_cast<int>( wcslen( deviceCaps.szPname ) ), &stringName[0], length, NULL, NULL );
+                 CP_UTF8, 0, deviceCaps.szPname, static_cast<int>( wcslen( deviceCaps.szPname ) ), &stringName[0], length, NULL, NULL );
 #else
     stringName = std::string( deviceCaps.szPname );
 #endif
@@ -2572,7 +2576,8 @@ void MidiOutWinMM::sendMessage( std::vector<unsigned char> *message )
     MMRESULT result;
     WinMidiData *data = static_cast<WinMidiData *>( apiData_ );
     if ( message->at( 0 ) == 0xF0 )
-    { // Sysex message
+    {
+        // Sysex message
 
         // Allocate buffer for sysex data.
         char *buffer = (char *)malloc( nBytes );
@@ -2617,7 +2622,8 @@ void MidiOutWinMM::sendMessage( std::vector<unsigned char> *message )
         free( buffer );
     }
     else
-    { // Channel or system message.
+    {
+        // Channel or system message.
 
         // Make sure the message size isn't too big.
         if ( nBytes > 3 )

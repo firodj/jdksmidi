@@ -97,12 +97,12 @@ int WINAPI WinMain( HINSTANCE hThisInstance, HINSTANCE hPrevInstance, LPSTR lpsz
                                NULL,                // No menu
                                hThisInstance,       // Program Instance handler
                                NULL                 // No Window Creation data
-                               );
+                             );
 
     // Now create the jdksmidi objects: the GUI notifier and the sequencer (to send messages to the window
     // the notifier needs its handle and the message id)
     MIDISequencerGUIEventNotifierWin32 notifier( hMainWin // The window handle to which send messages
-                                                 );
+                                               );
     NotifierMessage = notifier.GetMsgId();
     sequencer = new AdvancedSequencer( &notifier );
 
@@ -184,7 +184,7 @@ LRESULT CALLBACK WindowProcedure( HWND hwnd, UINT message, WPARAM wParam, LPARAM
 
         // Filename text box
         hFileName = CreateWindowW(
-            L"static", L"UNLOADED", WS_VISIBLE | WS_CHILD | SS_LEFTNOWORDWRAP, 400, 10, 380, 25, hwnd, (HMENU)7, NULL, NULL );
+                        L"static", L"UNLOADED", WS_VISIBLE | WS_CHILD | SS_LEFTNOWORDWRAP, 400, 10, 380, 25, hwnd, (HMENU)7, NULL, NULL );
 
         // Timesig text box
         hTime
@@ -222,19 +222,19 @@ LRESULT CALLBACK WindowProcedure( HWND hwnd, UINT message, WPARAM wParam, LPARAM
 
             // Track name text box
             hTrackNames[i] = CreateWindowW(
-                L"static", NULL, WS_VISIBLE | WS_CHILD | SS_LEFT, 45, 80 + 30 * i, 180, 25, hwnd, NULL, NULL, NULL );
+                                 L"static", NULL, WS_VISIBLE | WS_CHILD | SS_LEFT, 45, 80 + 30 * i, 180, 25, hwnd, NULL, NULL, NULL );
 
             // Track channel text box
             hTrackChans[i] = CreateWindowW(
-                L"static", NULL, WS_VISIBLE | WS_CHILD | SS_LEFT, 230, 80 + 30 * i, 70, 25, hwnd, NULL, NULL, NULL );
+                                 L"static", NULL, WS_VISIBLE | WS_CHILD | SS_LEFT, 230, 80 + 30 * i, 70, 25, hwnd, NULL, NULL, NULL );
 
             // Track program (patch) text box
             hTrackPrgrs[i] = CreateWindowW(
-                L"static", NULL, WS_VISIBLE | WS_CHILD | SS_LEFT, 305, 80 + 30 * i, 180, 25, hwnd, NULL, NULL, NULL );
+                                 L"static", NULL, WS_VISIBLE | WS_CHILD | SS_LEFT, 305, 80 + 30 * i, 180, 25, hwnd, NULL, NULL, NULL );
 
             // Track volume text box
             hTrackVols[i] = CreateWindowW(
-                L"static", NULL, WS_VISIBLE | WS_CHILD | SS_LEFT, 490, 80 + 30 * i, 70, 25, hwnd, NULL, NULL, NULL );
+                                L"static", NULL, WS_VISIBLE | WS_CHILD | SS_LEFT, 490, 80 + 30 * i, 70, 25, hwnd, NULL, NULL, NULL );
         }
         break;
 
@@ -244,17 +244,20 @@ LRESULT CALLBACK WindowProcedure( HWND hwnd, UINT message, WPARAM wParam, LPARAM
     case WM_COMMAND:
 
         if ( LOWORD( wParam ) == 1 )
-        { // Load
+        {
+            // Load
             LoadFile();
         }
 
         if ( LOWORD( wParam ) == 2 )
-        { // Rew
+        {
+            // Rew
             sequencer->GoToZero();
         }
 
         if ( LOWORD( wParam ) == 3 )
-        { // Play
+        {
+            // Play
             // start playing the file
             sequencer->Play();
             // start a Windows timer for updating the smpte box: the timer
@@ -266,18 +269,21 @@ LRESULT CALLBACK WindowProcedure( HWND hwnd, UINT message, WPARAM wParam, LPARAM
         }
 
         if ( LOWORD( wParam ) == 4 )
-        {                             // Stop
+        {
+            // Stop
             sequencer->Stop();        // stop playback
             KillTimer( hMainWin, 1 ); // stop the timer (1 is the timer id)
         }
 
         if ( LOWORD( wParam ) == 5 )
-        { // Step backward
+        {
+            // Step backward
             sequencer->GoToMeasure( sequencer->GetMeasure() - 1 );
         }
 
         if ( LOWORD( wParam ) == 6 )
-        { // Step forward
+        {
+            // Step forward
             sequencer->GoToMeasure( sequencer->GetMeasure() + 1 );
         }
         break;
@@ -286,7 +292,8 @@ LRESULT CALLBACK WindowProcedure( HWND hwnd, UINT message, WPARAM wParam, LPARAM
     case WM_TIMER:
 
         if ( LOWORD( wParam ) == 1 )
-        { // timer id
+        {
+            // timer id
             // update the Smpte box with the current SMPTE string
             SetWindowText( hSmpte, GetSmpteString() );
         }
@@ -322,14 +329,17 @@ VOID LoadFile()
     ofn.lpstrDefExt = "mid";
 
     if ( GetOpenFileName( &ofn ) )
-    { // Shows the file choosing control and waits until it is closed
+    {
+        // Shows the file choosing control and waits until it is closed
         // returning the filename in szFileName
         if ( !sequencer->Load( szFileName ) )
-        { // Error: the sequencer could not load the file
+        {
+            // Error: the sequencer could not load the file
             MessageBox( NULL, ( LPCSTR ) "File loading failed", NULL, MB_ICONERROR | MB_OK );
         }
         else
-        {   // File loading OK
+        {
+            // File loading OK
             /* NOTE: currently the notifier is totally fooled by format 0 MIDIFiles (all events in track 0) and reports
              * incorrect informations on track names, volumes, etc. This patch makes a 17-tracks multitrack from the
              * original 1-track, modifying the midifile: be careful if you use this in contests in which you may re-save
@@ -391,7 +401,8 @@ VOID SetControls()
         }
 
         if ( sequencer->FindFirstChannelOnTrack( i + 1 ) == -1 )
-        { // there aren't channel events or the track is empty
+        {
+            // there aren't channel events or the track is empty
             SetWindowText( hTrackChans[i], "---" );
         }
         else

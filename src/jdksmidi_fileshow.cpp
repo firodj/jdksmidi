@@ -300,7 +300,8 @@ bool MIDIFileShow::mf_text( MIDIClockTime time, int type, int len, unsigned char
 {
     static const char *text_event_names[16]
         = {"SEQ. #    ", "GENERIC   ", "COPYRIGHT ", "TRACK NAME", "INST. NAME", "LYRIC     ", "MARKER    ", "CUE       ",
-           "PROGRAM   ", "DEVICE    ", "UNKNOWN   ", "UNKNOWN   ", "UNKNOWN   ", "UNKNOWN   ", "UNKNOWN   ", "UNKNOWN   "};
+           "PROGRAM   ", "DEVICE    ", "UNKNOWN   ", "UNKNOWN   ", "UNKNOWN   ", "UNKNOWN   ", "UNKNOWN   ", "UNKNOWN   "
+          };
 
     if ( type > 15 )
         type = 15;

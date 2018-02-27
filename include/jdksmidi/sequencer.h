@@ -63,7 +63,7 @@ class MIDISequencer;
 
 class MIDISequencerGUIEvent
 {
-  public:
+public:
 
     /// Constructor: a generic event with all attributes set to 0
     MIDISequencerGUIEvent()
@@ -157,7 +157,7 @@ class MIDISequencerGUIEvent
         GROUP_TRACK_VOLUME   ///< Volume change
     };
 
-  private:
+private:
     unsigned long bits;
 };
 
@@ -172,7 +172,7 @@ class MIDISequencerGUIEvent
 
 class MIDISequencerGUIEventNotifier
 {
-  public:
+public:
 
     /// The constructor.
     MIDISequencerGUIEventNotifier()
@@ -201,7 +201,7 @@ class MIDISequencerGUIEventNotifier
 
 class MIDISequencerGUIEventNotifierText : public MIDISequencerGUIEventNotifier
 {
-  public:
+public:
 
     /// The constructor. The class will send text messages to the FILE *f
     MIDISequencerGUIEventNotifierText( FILE *f_ )
@@ -227,7 +227,7 @@ class MIDISequencerGUIEventNotifierText : public MIDISequencerGUIEventNotifier
         en = f;
     }
 
-  private:
+private:
 
     FILE *f;
     bool en;
@@ -283,7 +283,7 @@ private:
 
 class MIDISequencerTrackProcessor : public MIDIProcessor
 {
-  public:
+public:
     /// The constructor. Default is no processing (MIDI messages leave the processor unchanged)
     MIDISequencerTrackProcessor();
 
@@ -319,7 +319,7 @@ class MIDISequencerTrackProcessor : public MIDIProcessor
 
 class MIDISequencerTrackState : public MIDIProcessor
 {
-  public:
+public:
 
     /// The constructor.
     /// Initial attributes are pg = -1, volume = 100, bender_value = 0, all notes off, track_name = ""
@@ -374,7 +374,7 @@ class MIDISequencerTrackState : public MIDIProcessor
 
 class MIDISequencerState : public MIDIProcessor
 {
-  public:
+public:
 
     /// The constructor sets sequencer current time to 0. It allocates memory to hold a MIDISequencerTrackState
     /// for every track. Parameters are not owned.
@@ -436,7 +436,7 @@ class MIDISequencerState : public MIDIProcessor
 
 class MIDISequencer
 {
-  public:
+public:
 
     /// The constructor.
     /// \param m a pointer to a MIDIMultitrack that will hold MIDI messages
@@ -589,7 +589,7 @@ class MIDISequencer
     /// Returns the total duration of the song (i.e.\ the time of last not end of track midi event)
     double GetMisicDurationInSeconds();
 
-  protected:
+protected:
 
     /// Internal use: scans events at 'now' time upgrading the sequencer status
     void ScanEventsAtThisTime();

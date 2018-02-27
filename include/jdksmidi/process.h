@@ -50,7 +50,7 @@ class MIDIProcessorTransposer;
 
 class MIDIProcessor
 {
-  public:
+public:
     /// The constructor
     MIDIProcessor();
 
@@ -69,7 +69,7 @@ class MIDIProcessor
 
 class MIDIMultiProcessor : public MIDIProcessor
 {
-  public:
+public:
     /// The constructor.\ You must set the max number of MIDIProcessor of the chain
     MIDIMultiProcessor( int num_processors );
 
@@ -108,7 +108,7 @@ class MIDIMultiProcessor : public MIDIProcessor
     /// through the chain of processors, skipping unassigned positions
     virtual bool Process( MIDITimedBigMessage *msg );
 
-  private:
+private:
     MIDIProcessor **processors; ///< An array of pointers to MIDIProcessor objects
     int num_processors;         ///< The size of the array
 };
@@ -121,7 +121,7 @@ class MIDIMultiProcessor : public MIDIProcessor
 
 class MIDIProcessorTransposer : public MIDIProcessor
 {
-  public:
+public:
     /// The constructor
     MIDIProcessorTransposer();
 
@@ -146,7 +146,7 @@ class MIDIProcessorTransposer : public MIDIProcessor
     /// Transposes the message _msg_ (inherited from MIDIProcessor)
     virtual bool Process( MIDITimedBigMessage *msg );
 
-  private:
+private:
     int trans_amount[16];
 };
 
@@ -156,7 +156,7 @@ class MIDIProcessorTransposer : public MIDIProcessor
 
 class MIDIProcessorRechannelizer : public MIDIProcessor
 {
-  public:
+public:
     /// The constructor
     MIDIProcessorRechannelizer();
 
@@ -182,7 +182,7 @@ class MIDIProcessorRechannelizer : public MIDIProcessor
     /// Rechannelizes the message _msg_ (inherited from MIDIProcessor)
     virtual bool Process( MIDITimedBigMessage *msg );
 
-  private:
+private:
 
     int rechan_map[16];
 };

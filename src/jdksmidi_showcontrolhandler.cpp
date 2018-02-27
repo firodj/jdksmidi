@@ -144,7 +144,7 @@ bool MIDISCHandle::Dispatch( const MIDIShowControlPacket &p )
 
         else if ( p.GetHasQList() )
             e = TimedGo(
-                p.GetHours(), p.GetMinutes(), p.GetSeconds(), p.GetFrames(), p.GetFractFrames(), p.GetQNumber(), p.GetQList() );
+                    p.GetHours(), p.GetMinutes(), p.GetSeconds(), p.GetFrames(), p.GetFractFrames(), p.GetQNumber(), p.GetQList() );
 
         else if ( p.GetHasQNumber() )
             e = TimedGo( p.GetHours(), p.GetMinutes(), p.GetSeconds(), p.GetFrames(), p.GetFractFrames(), p.GetQNumber() );

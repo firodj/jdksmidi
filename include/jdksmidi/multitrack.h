@@ -63,12 +63,12 @@ class MIDIMultiTrackIterator;
 
 class MIDIMultiTrack
 {
-  private:
+private:
 
     // delete old multitrack, construct new
     bool CreateObject( int num_tracks_, bool deletable_ );
 
-  public:
+public:
 
     /// The constructor. If deletable_ = true it allocates memory for the tracks and deletes it in the destructor,
     /// otherwise the user must manually assign tracks to the array.
@@ -178,7 +178,7 @@ class MIDIMultiTrack
 
     /* END OF NEW BY NC */
 
-  protected:
+protected:
 
     MIDITrack **tracks;   ///< The array of pointers to the MIDITrack objects
     int number_of_tracks; ///< The number of allocated tracks
@@ -193,7 +193,7 @@ class MIDIMultiTrack
 
 class MIDIMultiTrackIteratorState
 {
-  public:
+public:
 
     /// The constructor creates a MIDIMultiTrackIteratorState with a given number of tracks.
     MIDIMultiTrackIteratorState( int num_tracks_ = 64 );
@@ -247,7 +247,7 @@ class MIDIMultiTrackIteratorState
 
 class MIDIMultiTrackIterator
 {
-  public:
+public:
 
     /// The constructor.
     MIDIMultiTrackIterator( const MIDIMultiTrack *mlt );
@@ -307,7 +307,7 @@ class MIDIMultiTrackIterator
         return multitrack;
     }
 
-  protected:
+protected:
 
     const MIDIMultiTrack *multitrack;  ///< The associated multitrack
     MIDIMultiTrackIteratorState state; ///< The state of the iterator

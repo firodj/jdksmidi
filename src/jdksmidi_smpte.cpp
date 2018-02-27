@@ -88,7 +88,7 @@ void SMPTE::AddHours( char h )
                 * h * ( 60          // seconds per minute
                         * 60        // minutes per hour
                         / 10        // compensate for freq*10
-                        ) );
+                      ) );
 }
 
 void SMPTE::AddMinutes( char m )
@@ -96,7 +96,7 @@ void SMPTE::AddMinutes( char m )
     AddSamples( GetSampleRateLong() * m * // samples per second times 10
                 ( 60                      // seconds per minute
                   / 10 )                  // compensate for freq*10
-                );
+              );
 }
 
 void SMPTE::AddSeconds( char s )
@@ -104,7 +104,7 @@ void SMPTE::AddSeconds( char s )
     AddSamples( GetSampleRateLong() // samples per second times 10
                 * s                 // number of seconds
                 / 10                // compensate for freq*10
-                );
+              );
 }
 
 void SMPTE::AddFrames( char f )
@@ -113,7 +113,7 @@ void SMPTE::AddFrames( char f )
                 * f                  // number of frames
                 * 10                 // times 10
                 / GetSMPTERateLong() // divide by smpte rate (frames per second) times 100
-                );
+              );
 }
 
 void SMPTE::AddSubFrames( char sf )
@@ -122,7 +122,7 @@ void SMPTE::AddSubFrames( char sf )
                 * sf                 // number of sub frames
                 / GetSMPTERateLong() // divide by smpte rate (frames per second) times 100
                 / 10                 // divide by 10 to get hundredths of a frame
-                );
+              );
 }
 
 void SMPTE::SampleToTime()

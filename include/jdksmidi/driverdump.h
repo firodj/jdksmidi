@@ -45,7 +45,7 @@ namespace jdksmidi
 class MIDIDriverDump : public MIDIDriver
 {
 
-  public:
+public:
 
     /// The constructor.
     MIDIDriverDump( int queue_size, FILE *outfile );
@@ -91,7 +91,7 @@ class MIDIDriverDump : public MIDIDriver
     /// Callback function
     virtual void TimeTick( unsigned long sys_time );
 
-  protected:
+protected:
 
     FILE *f; ///< The output file
 };

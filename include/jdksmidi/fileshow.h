@@ -45,11 +45,11 @@ namespace jdksmidi
 
 class MIDIFileShow : public MIDIFileEvents
 {
-  public:
+public:
     MIDIFileShow( FILE *out_, bool sqspecific_as_text_ = false );
     virtual ~MIDIFileShow();
 
-  protected:
+protected:
 
     virtual void show_time( MIDIClockTime time );
 
@@ -84,7 +84,7 @@ class MIDIFileShow : public MIDIFileEvents
     FILE *out;
     int division;
 
-  private:
+private:
     bool sqspecific_as_text; // if true print META_SEQUENCER_SPECIFIC events as text string
 };
 }

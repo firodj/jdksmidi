@@ -51,7 +51,7 @@ namespace jdksmidi
 
 class MIDITempo
 {
-  public:
+public:
     MIDITempo()
     {
         tempo = 120 << 8;
@@ -159,7 +159,7 @@ class MIDITempo
             return ( 60000000L / 256 ) / ( 120 * 256 );
     }
 
-  protected:
+protected:
     unsigned long tempo;
 };
 }
