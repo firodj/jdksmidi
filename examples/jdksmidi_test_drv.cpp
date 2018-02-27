@@ -36,7 +36,7 @@ using namespace jdksmidi;
 
 void DumpTrackNames( MIDISequencer *seq )
 {
-    fprintf( stdout, "TEMPO = %f\n", seq->GetTrackState( 0 )->tempobpm );
+    fprintf( stdout, "TEMPO = %f\n", seq->GetState()->tempobpm );
 
     for ( int i = 0; i < seq->GetNumTracks(); ++i )
     {
