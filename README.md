@@ -1,0 +1,84 @@
+# J.D. Koftinoff Software, Ltd's C++ MIDI Library Source Code
+
+UPDATE BY N.C. (Experimental 3)
+-------------------------------
+
+In this branch I'm trying to integrate the MIDI ALSA Driver developed by G. Palem (see http://blogs.msdn.com/b/gpalem/archive/2011/03/17/alsa-driver-for-jdkmidi-with-rtmidi-on-linux-using-c-0x-futures.aspx)
+It has the following features:
+- uses the c++ 11 standard (<chrono>, <future> etc.) to get the asyncronous procedure which sends the MIDI data to the ports when playing
+- relies on another library, RtMidi by G. P. Schiavone, for the hardware port communication.
+
+My goal was to integrate all, Windows and Linux, with c++11 threads and RtMidi, into the class MIDIDriver, in order to avoid all OS dependent code in the library (mantaining it only in RtMidi), and no more
+need for dedicated subclasses MIDIDriverWin32, MIDIDriverALSA.
+Unfortunately this was not possible at this stage because MinGW 4.8.1 doesn't support Windows thread yet, so I got a compromise solution:
+- I moved all the MIDI I/O related methods (opening/closing MIDI ports, sending them messages ...) in the base class MIDIDriver, which uses RtMidi for the effective communication;
+- I left in the MIDIDriverWin32 and MIDIDriverALSA only the methods to get a dedicated thread sending the data, specific for every OS.
+
+In particular, the test file test_advancedsequencer.cpp should now compile and work in Win32 and Linux
+
+---
+
+This is a fork of the JDKSMidi library by J.D. Koftinoff and other authors.
+I made some improvemsnts to it, and specifically:
+ - The development of the class AdvancedSequencer, an all-in-one object capable to load and play MIDI files with a single call to a class method.
+ - Improvements to the class MIDIDriver
+ - Added functions to the classes MIDITrack and MIDIMultiTrack to edit the MIDI content
+ - Some bug fixes
+ - Added doxygen documentation to many classes (not yet complete)
+
+Moreover, I added some new test programs, one of them for Windows (see the examples in the \examples\win32 folder).
+Currently the driver is only effective for Windows, but ALSA drivers have been developed by Palem Gopalakrishna and
+could be integrated soon.
+Nicola Cassetta
+
+ORIGINAL README
+---------------
+
+> J.D. Koftinoff Software, Ltd's C++ MIDI Library Source Code
+>
+> web: www.jdkoftinoff.com
+>
+> email: jeffk@jdkoftinoff.com
+>
+> Released under the GPL (GNU PUBLIC LICENSE): Apr 27, 2004
+
+For details of the GPL please see the file:
+* `COPYING`
+
+Please see the documentation in the subdirectory:
+* `docs`
+
+Supported Operating Systems:
+* win32,
+* win64,
+* Mac OS X,
+* Linux,
+* UcLinux,
+* other Unix style systems,
+* other embedded systems, 16 bit, 32 bit, 64 bit.
+
+Supported Compilers:
+* GNU gcc 3.4,4.0 - 4.4
+* MSVC 6,7,8,9
+* Intel C++
+
+This library was originally a collection of utility functions for MIDI written in C back in 1986 for the Atari ST computer. Since then it has evolved into a fairly powerful C++ MIDI Library including:
+
+* MIDI parsing
+* MIDI Show Control message creation and handling
+* Standard MIDI File type 0 and type 1 reading and writing
+* Timestamped MIDI message and System Exclusive encapsulation
+* Efficient MIDI Track objects for sequencing
+* MIDI Track objects for editing MIDI events
+* MIDI message process chains
+* Containers for multiple MIDI Tracks with iterators
+* MIDI Sequencer core for sequencing and triggering GUI events
+* MIDI Driver abstractions for I/O and sequencing
+* MIDI Driver implementation for Win32 for I/O and sequencing
+* Tempo calculations
+* MIDI Matrix to count note on's and off's and hold pedals to avoid stuck notes and all-notes-off problems when merging midi streams
+* SMPTE management and calculations
+* MIDI Utilities useful functions
+
+This project now includes copyrighted content from multiple contributors.
+Please see the file `AUTHORS` for more information.
