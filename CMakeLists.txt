@@ -1,15 +1,94 @@
-cmake_minimum_required (VERSION 2.8) 
-project (JDKSMIDI)
+cmake_minimum_required (VERSION 2.8)
+project (jdksmidi)
 
 set(CMAKE_CXX_STANDARD 17)
 
-include_directories( ${JDKSMIDI_SOURCE_DIR}/include ${JDKSMIDI_SOURCE_DIR}/RtMidi )
+option(RTMIDI_API_CORE "Compile with CoreMIDI support." ${APPLE})
+option(RTMIDI_API_WINMM "Compile with WINMM support." ${WIN32})
 
-add_library (jdksmidi src/jdksmidi_advancedsequencer.cpp src/jdksmidi_driver.cpp src/jdksmidi_driverdump.cpp src/jdksmidi_edittrack.cpp src/jdksmidi_file.cpp src/jdksmidi_fileread.cpp src/jdksmidi_filereadmultitrack.cpp src/jdksmidi_fileshow.cpp src/jdksmidi_filewrite.cpp src/jdksmidi_filewritemultitrack.cpp src/jdksmidi_keysig.cpp src/jdksmidi_manager.cpp src/jdksmidi_matrix.cpp src/jdksmidi_midi.cpp src/jdksmidi_msg.cpp src/jdksmidi_multitrack.cpp src/jdksmidi_parser.cpp src/jdksmidi_process.cpp src/jdksmidi_queue.cpp src/jdksmidi_sequencer.cpp src/jdksmidi_showcontrol.cpp src/jdksmidi_showcontrolhandler.cpp src/jdksmidi_smpte.cpp src/jdksmidi_sysex.cpp src/jdksmidi_tempo.cpp src/jdksmidi_tick.cpp src/jdksmidi_track.cpp src/jdksmidi_utils.cpp RtMidi/RtMidi.cpp)
+# Necessary for Windows
+if(WIN32)
+  set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
+endif()
+
+set(rtmidi_SOURCES RtMidi/RtMidi.cpp include/RtMidi/RtMidi.h)
+set(API_DEFS)
+set(API_LIST)
+set(LINKLIBS)
+
+# WinMM
+if(RTMIDI_API_WINMM)
+  list(APPEND API_DEFS "-D__WINDOWS_MM__")
+  list(APPEND API_LIST "winmm")
+  list(APPEND LINKLIBS winmm)
+endif()
+
+# CoreMIDI
+if(RTMIDI_API_CORE)
+  find_library(CORESERVICES_LIB CoreServices)
+  find_library(COREAUDIO_LIB CoreAudio)
+  find_library(COREMIDI_LIB CoreMIDI)
+  find_library(COREFOUNDATION_LIB CoreFoundation)
+  list(APPEND API_DEFS "-D__MACOSX_CORE__")
+  list(APPEND API_LIST "coremidi")
+  list(APPEND LINKLIBS ${CORESERVICES_LIB} ${COREAUDIO_LIB} ${COREMIDI_LIB} ${COREFOUNDATION_LIB})
+endif()
+
+add_library(rtmidi STATIC ${rtmidi_SOURCES})
+
+target_include_directories(rtmidi
+  PUBLIC "$<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>"
+)
+target_compile_definitions(rtmidi PRIVATE ${API_DEFS})
+target_compile_definitions(rtmidi PRIVATE RTMIDI_EXPORT)
+target_link_libraries(rtmidi PRIVATE ${LINKLIBS})
+
+# Message
+string(REPLACE ";" " " apilist "${API_LIST}")
+message(STATUS "Compiling with support for: ${apilist}")
+string(REPLACE ";" " " api "${API_DEFS}")
+
+list (APPEND SOURCEFILES
+  src/jdksmidi_advancedsequencer.cpp
+  src/jdksmidi_driver.cpp
+  src/jdksmidi_driverdump.cpp
+  src/jdksmidi_edittrack.cpp
+  src/jdksmidi_file.cpp
+  src/jdksmidi_fileread.cpp
+  src/jdksmidi_filereadmultitrack.cpp
+  src/jdksmidi_fileshow.cpp
+  src/jdksmidi_filewrite.cpp
+  src/jdksmidi_filewritemultitrack.cpp
+  src/jdksmidi_keysig.cpp
+  src/jdksmidi_manager.cpp
+  src/jdksmidi_matrix.cpp
+  src/jdksmidi_midi.cpp
+  src/jdksmidi_msg.cpp
+  src/jdksmidi_multitrack.cpp
+  src/jdksmidi_parser.cpp
+  src/jdksmidi_process.cpp
+  src/jdksmidi_queue.cpp
+  src/jdksmidi_sequencer.cpp
+  src/jdksmidi_showcontrol.cpp
+  src/jdksmidi_showcontrolhandler.cpp
+  src/jdksmidi_smpte.cpp
+  src/jdksmidi_sysex.cpp
+  src/jdksmidi_tempo.cpp
+  src/jdksmidi_tick.cpp
+  src/jdksmidi_track.cpp
+  src/jdksmidi_utils.cpp
+)
+
+add_library (${PROJECT_NAME} ${SOURCEFILES})
+
+target_include_directories(${PROJECT_NAME}
+  PUBLIC "$<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>"
+)
+
+target_link_libraries(${PROJCET_NAME} rtmidi)
 
 if( ${JDKSMIDI_BUILD_EXAMPLES} )
-
-  link_directories( ${JDKSMIDI_BINARY_DIR} )
+  #link_directories( ${JDKSMIDI_BINARY_DIR} )
 
   add_executable(create_midifile examples/create_midifile.cpp)
   target_link_libraries(create_midifile jdksmidi)

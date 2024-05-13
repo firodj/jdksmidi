@@ -20,7 +20,7 @@
 
 #else // Below code is only for non_Windows
 
-//#include "RtMidi.h"
+//#include "RtMidi/RtMidi.h"
 #include "jdksmidi/AlsaDriver.h"
 #include "MidiTimer.h"
 

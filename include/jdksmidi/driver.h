@@ -52,7 +52,7 @@
 #include "jdksmidi/tick.h"
 
 #define AVOID_TIMESTAMPING
-#include"../RtMidi/RtMidi.h"
+#include "RtMidi/RtMidi.h"
 
 namespace jdksmidi
 {
