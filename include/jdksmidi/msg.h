@@ -252,14 +252,24 @@ public:
     /// If the message is a time signature meta-message, GetTimeSigDenominator() returns the denominator of the time signature.
     unsigned char GetTimeSigDenominator() const
     {
-        return byte3;
+        return 1 << byte3;
     }
 
     /// If the message is a time signature meta-message, GetTimeSigDenominatorPower() returns the denominator power of the time
     /// signature.
     unsigned char GetTimeSigDenominatorPower() const
     {
+        return byte3;
+    }
+
+    unsigned char GetTimeSigMidiClocksPerMetronome() const
+    {
         return byte4;
+    }
+
+    unsigned char GetTimeSigNum32ndPerMidiQuarterNote() const
+    {
+        return byte5;
     }
 
     /// If the message is a key signature meta-message, GetKeySigSharpFlats() returns the standard midi file form of the key.

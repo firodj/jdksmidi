@@ -354,10 +354,6 @@ void MIDIMessage::SetPan( unsigned char chan, double pan )
     //  int pan_lsb = ipan % 128;
 
     SetControlChange( chan, C_PAN, pan_msb );
-    //  Russian (windows 1251):
-    //  к сожалению любое pan_lsb сбрасывает панораму в центр при проигрывании midi
-    //  и через MediaPlayer и даже через Timidity, поэтому не делаем установку lsb
-    //  English:
     //  unfortunately any pan_lsb drops panorama to the center with the playback of midi file
     //  through MediaPlayer and even through Timidity; therefore we do not make the set of lsb
     //  SetControlChange( chan, C_PAN + C_LSB, pan_lsb ); // don't work...
@@ -492,13 +488,9 @@ void MIDIMessage::SetTimeSig( unsigned char numerator,
                               unsigned char midi_clocks_per_metronome,
                               unsigned char num_32nd_per_midi_quarter_note )
 {
-    int denominator = 1 << denominator_power;
-    // forward to msg denominator instead denominator power
-    // set numerator in msg byte2, denominator in byte3
-    SetMetaEvent( META_TIMESIG, numerator, denominator );
-    SetByte4( denominator_power ); // also add original denominator power in byte4
-    SetByte5( midi_clocks_per_metronome );
-    SetByte6( num_32nd_per_midi_quarter_note );
+    SetMetaEvent( META_TIMESIG, numerator, denominator_power );
+    SetByte4( midi_clocks_per_metronome );
+    SetByte5( num_32nd_per_midi_quarter_note );
 }
 
 void MIDIMessage::SetKeySig( signed char sharp_flats, unsigned char major_minor )
