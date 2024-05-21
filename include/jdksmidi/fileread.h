@@ -174,6 +174,7 @@ public:
     //
 
     virtual void mf_error( const char * );
+    virtual void mf_warning( const char * );
 
     virtual void mf_starttrack( int trk );
     virtual void mf_endtrack( int trk );

@@ -516,6 +516,8 @@ const MIDISequencerState &MIDISequencerState::operator=( const MIDISequencerStat
             memmove( track_state[i]->track_name, s.track_state[i]->track_name, sizeof( track_state[i] ) );
             track_state[i]->got_good_track_name = s.track_state[i]->got_good_track_name;
             track_state[i]->notes_are_on = s.track_state[i]->notes_are_on;
+            // FIXME: warning: destination for this 'memmove' call is a pointer to dynamic class 'MIDIMatrix';
+            // vtable pointer will be overwritten [-Wdynamic-class-memaccess]
             memmove( &( track_state[i]->note_matrix ), &( s.track_state[i]->note_matrix ), sizeof( MIDIMatrix ) );
             track_state[i]->seq = s.seq;
             track_state[i]->track = s.track_state[i]->track;
@@ -1210,7 +1212,7 @@ bool MIDISequencer::GetNextEvent( int *tracknum, MIDITimedBigMessage *msg )
     return false;
 }
 
-double MIDISequencer::GetMisicDurationInSeconds()
+double MIDISequencer::GetMusicDurationInSeconds()
 {
     double event_time = 0.; // in milliseconds
 

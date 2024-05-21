@@ -162,6 +162,10 @@ void MIDIFileEvents::mf_error( const char *s )
 {
 }
 
+void MIDIFileEvents::mf_warning( const char *s )
+{
+}
+
 void MIDIFileEvents::mf_header( int a, int b, int c )
 {
 }
@@ -400,6 +404,7 @@ void MIDIFileRead::ReadTrack()
     int running = 0; // 1 when running status used
     int status = 0;  // (possible running) status byte
     int needed;      // number of bytes needed (1 or 2) for a channel message, or 0 if not a channel message
+    int eot_reached = 0;
 
     if ( ReadMT( _MTrk, 0 ) == 0xFFFF )
         return;
@@ -441,7 +446,8 @@ void MIDIFileRead::ReadTrack()
             else
                 c1 = EGetC();
             if ( !FormChanMessage( status, c1, ( needed > 1 ) ? EGetC() : 0 ) )
-                abort_parse = true;
+                mf_error( "Fail FormChanMessage" );
+
             continue;
         }
 
@@ -456,7 +462,6 @@ void MIDIFileRead::ReadTrack()
             {
                 // false variable length in midifile, thanks to Stephan.Huebler@tu-dresden.de
                 mf_error( "Variable length incorrect" );
-                abort_parse = true;
                 break;
             }
             lookfor = to_be_read - lng;
@@ -465,7 +470,13 @@ void MIDIFileRead::ReadTrack()
                 MsgAdd( EGetC() );
 
             if ( !event_handler->MetaEvent( cur_time, type, act_msg_len, the_msg ) )
-                abort_parse = true;
+                mf_error( "Fail MetaEvent" );
+
+            if (type == MF_META_END_OF_TRACK) {
+                if (to_be_read)
+                    event_handler->mf_warning( "End of track but track length still want read" );
+                to_be_read = 0;
+            }
             break;
 
         case 0xF0: // SYSEX_START
@@ -475,7 +486,6 @@ void MIDIFileRead::ReadTrack()
             if ( lng > to_be_read )
             {
                 mf_error( "Variable length incorrect" );
-                abort_parse = true;
                 break;
             }
             lookfor = to_be_read - lng;
@@ -484,12 +494,12 @@ void MIDIFileRead::ReadTrack()
                 MsgAdd( EGetC() );
 
             if ( !event_handler->mf_sysex( cur_time, type, act_msg_len, the_msg ) )
-                abort_parse = true;
+                mf_error( "Fail SysEx" );
             break;
 
         default:
             mf_error( "Unexpected status byte" );
-            abort_parse = true;
+
             break;
         }
     }
@@ -552,7 +562,6 @@ int MIDIFileRead::EGetC()
     if ( c < 0 )
     {
         mf_error( "Unexpected Stream Error" );
-        abort_parse = true;
         return -1;
     }
 

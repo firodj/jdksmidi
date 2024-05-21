@@ -201,26 +201,28 @@ bool MIDIFileShow::mf_metamisc( MIDIClockTime time, int type, int len, unsigned 
         fprintf( out, "Sequence Number  %d\n", To16Bit( d[0], d[1] ) );
         return true;
     case MF_META_SMPTE:
-        fprintf( out, "SMPTE Event      %02x, %02x, %02x, %02x, %02x\n", d[0], d[1], d[2], d[3], d[4] );
+        fprintf( out, "SMPTE Event      %02x, %02x, %02x, %02x, %02x", d[0], d[1], d[2], d[3], d[4] );
         return true;
+
     case MF_META_TRACK_LOOP:
-        fprintf( out, "META-EVENT  TRACK_LOOP      Length=%d\n", len );
+        fprintf( out, "META-EVENT  TRACK_LOOP      Length=%d", len );
         break;
     case MF_META_OUTPUT_CABLE:
-        fprintf( out, "META-EVENT  OUTPUT_CABLE    Length=%d\n", len );
+        fprintf( out, "META-EVENT  OUTPUT_CABLE    Length=%d", len );
         break;
     case MF_META_CHANNEL_PREFIX:
-        fprintf( out, "META-EVENT  CHANNEL_PREFIX  Length=%d\n", len );
+        fprintf( out, "META-EVENT  CHANNEL_PREFIX  Length=%d", len );
         break;
     default:
-        fprintf( out, "META-EVENT  TYPE=%d         Length=%d\n", type, len );
+        fprintf( out, "META-EVENT  TYPE=%d         Length=%d", type, len );
         break;
     }
 
     for ( int i = 0; i < len; ++i )
     {
+        if (i == 0) fprintf( out, "  Data=");
         if ( i > 0 && ( i % 16 ) == 0 )
-            fprintf( out, "\n" );
+            fprintf( out, " | " );
 
         fprintf( out, "%02x ", (int)d[i] );
     }

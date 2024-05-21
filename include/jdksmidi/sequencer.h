@@ -587,7 +587,7 @@ public:
     bool GetNextEvent( int *tracknum, MIDITimedBigMessage *msg );
 
     /// Returns the total duration of the song (i.e.\ the time of last not end of track midi event)
-    double GetMisicDurationInSeconds();
+    double GetMusicDurationInSeconds();
 
 protected:
 

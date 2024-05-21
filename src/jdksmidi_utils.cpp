@@ -295,7 +295,7 @@ bool WriteMidiFile( const MIDIMultiTrack &src, const char *file, bool use_runnin
 double GetMusicDurationInSeconds( const MIDIMultiTrack &mt )
 {
     MIDISequencer seq( &mt );
-    return seq.GetMisicDurationInSeconds();
+    return seq.GetMusicDurationInSeconds();
 }
 
 std::string MultiTrackAsText( const MIDIMultiTrack &mt )
