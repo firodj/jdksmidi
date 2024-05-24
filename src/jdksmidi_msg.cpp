@@ -43,6 +43,7 @@
 #include "jdksmidi/sysex.h"
 #include "jdksmidi/msg.h"
 #include "jdksmidi/file.h"
+#include "jdksmidi/alloc.h"
 
 namespace jdksmidi
 {
@@ -90,10 +91,12 @@ const char *MIDIMessage::service_msg_name[] = {"SERVICE  ERROR NOT SERVICE",    
                                                "SERVICE  ERROR INVALID SERVICE" // OUT_OF_RANGE_SERVICE_NUM = 4
                                               };
 
-const char *MIDIMessage::MsgToText( char *txt ) const
+const char *MIDIMessage::MsgToText( char *txt, size_t txtsize ) const
 {
     char buf[256];
     int len = GetLengthMSG();
+
+    char * txt0 = txt;
     *txt = 0;
 
     if ( IsServiceMsg() )
@@ -101,46 +104,46 @@ const char *MIDIMessage::MsgToText( char *txt ) const
         unsigned int serv = GetServiceNum();
         if ( serv > OUT_OF_RANGE_SERVICE_NUM )
             serv = OUT_OF_RANGE_SERVICE_NUM;
-        sprintf( buf, "%s  ", service_msg_name[serv] );
+        snprintf( buf, sizeof(buf), "%s  ", service_msg_name[serv] );
         strcat( txt, buf );
         return txt;
     }
 
     if ( IsMetaEvent() ) // all Meta Events
     {
-        sprintf( buf, "%s ", sys_msg_name[status - 0xF0] );
+        snprintf( buf, sizeof(buf), "%s ", sys_msg_name[status - 0xF0] );
         strcat( txt, buf );
 
-        sprintf( buf, "Type %02X  ", (int)byte1 ); // type of meta events
+        snprintf( buf, sizeof(buf), "Type %02X  ", (int)byte1 ); // type of meta events
         strcat( txt, buf );
 
         if ( len > 0 )
         {
-            sprintf( buf, "Data %02X  ", (int)byte2 );
+            snprintf( buf, sizeof(buf), "Data %02X  ", (int)byte2 );
             strcat( txt, buf );
         }
 
         if ( len > 1 )
         {
-            sprintf( buf, "%02X  ", (int)byte3 );
+            snprintf( buf, sizeof(buf), "%02X  ", (int)byte3 );
             strcat( txt, buf );
         }
 
         if ( len > 2 )
         {
-            sprintf( buf, "%02X  ", (int)byte4 );
+            snprintf( buf, sizeof(buf), "%02X  ", (int)byte4 );
             strcat( txt, buf );
         }
 
         if ( len > 3 )
         {
-            sprintf( buf, "%02X  ", (int)byte5 );
+            snprintf( buf, sizeof(buf), "%02X  ", (int)byte5 );
             strcat( txt, buf );
         }
 
         if ( len > 4 )
         {
-            sprintf( buf, "%02X  ", (int)byte6 );
+            snprintf( buf, sizeof(buf), "%02X  ", (int)byte6 );
             strcat( txt, buf );
         }
 
@@ -149,7 +152,7 @@ const char *MIDIMessage::MsgToText( char *txt ) const
 
     if ( IsSystemExclusive() ) // all System Exclusive Events
     {
-        sprintf( buf, "%s  ", sys_msg_name[status - 0xF0] );
+        snprintf( buf, sizeof(buf), "%s  ", sys_msg_name[status - 0xF0] );
         strcat( txt, buf );
         return txt;
     }
@@ -158,55 +161,56 @@ const char *MIDIMessage::MsgToText( char *txt ) const
 
     if ( IsAllNotesOff() )
     {
-        sprintf( buf, "Ch %2d  All Notes Off  Type %3d  Mode %3d ", (int)GetChannel() + 1, (int)byte1, (int)byte2 );
+        snprintf( buf, sizeof(buf), "Ch %2d  All Notes Off  Type %3d  Mode %3d ", (int)GetChannel() + 1, (int)byte1, (int)byte2 );
         strcat( txt, buf );
         return txt;
     }
 
     int type = ( status & 0xF0 ) >> 4;
 
-    sprintf( buf, "Ch %2d  ", (int)GetChannel() + 1 );
+    snprintf( buf, sizeof(buf), "Ch %2d  ", (int)GetChannel() + 1 );
     strcat( txt, buf );
 
-    sprintf( buf, "%s  ", chan_msg_name[type] );
+    snprintf( buf, sizeof(buf), "%s  ", chan_msg_name[type] );
     strcat( txt, buf );
 
     char *endtxt = txt + strlen( txt );
+    size_t endsize = txtsize - (endtxt - txt0);
 
     switch ( status & 0xf0 )
     {
     case NOTE_ON:
         if ( IsNoteOnV0() ) // velocity = 0: Note off
-            sprintf( endtxt, "Note %3d  Vel  %3d    (Note Off)  ", (int)byte1, (int)byte2 );
+            snprintf( endtxt, endsize - (endtxt - txt0), "Note %3d  Vel  %3d    (Note Off)  ", (int)byte1, (int)byte2 );
         else
-            sprintf( endtxt, "Note %3d  Vel  %3d  ", (int)byte1, (int)byte2 );
+            snprintf( endtxt, endsize, "Note %3d  Vel  %3d  ", (int)byte1, (int)byte2 );
         break;
 
     case NOTE_OFF:
-        sprintf( endtxt, "Note %3d  Vel  %3d  ", (int)byte1, (int)byte2 );
+        snprintf( endtxt, endsize, "Note %3d  Vel  %3d  ", (int)byte1, (int)byte2 );
         break;
 
     case POLY_PRESSURE:
-        sprintf( endtxt, "Note %3d  Pres %3d  ", (int)byte1, (int)byte2 );
+        snprintf( endtxt, endsize, "Note %3d  Pres %3d  ", (int)byte1, (int)byte2 );
         break;
 
     case CONTROL_CHANGE:
         if ( IsAllNotesOff() )
-            sprintf( endtxt, "Ctrl %3d  Val  %3d  (All Notes Off)  ", (int)byte1, (int)byte2 );
+            snprintf( endtxt, endsize, "Ctrl %3d  Val  %3d  (All Notes Off)  ", (int)byte1, (int)byte2 );
         else
-            sprintf( endtxt, "Ctrl %3d  Val  %3d  ", (int)byte1, (int)byte2 );
+            snprintf( endtxt, endsize, "Ctrl %3d  Val  %3d  ", (int)byte1, (int)byte2 );
         break;
 
     case PROGRAM_CHANGE:
-        sprintf( endtxt, "PG   %3d  ", (int)byte1 );
+        snprintf( endtxt, endsize, "PG   %3d  ", (int)byte1 );
         break;
 
     case CHANNEL_PRESSURE:
-        sprintf( endtxt, "Pres %3d  ", (int)byte1 );
+        snprintf( endtxt, endsize, "Pres %3d  ", (int)byte1 );
         break;
 
     case PITCH_BEND:
-        sprintf( endtxt, "Val %5d  ", (int)GetBenderValue() );
+        snprintf( endtxt, endsize, "Val %5d  ", (int)GetBenderValue() );
         break;
     }
 

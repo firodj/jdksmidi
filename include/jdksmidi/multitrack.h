@@ -43,7 +43,9 @@
 #ifndef JDKSMIDI_MULTITRACK_H
 #define JDKSMIDI_MULTITRACK_H
 
+#include "jdksmidi/midi.h"
 #include "jdksmidi/track.h"
+#include "jdksmidi/msg.h"
 
 namespace jdksmidi
 {

@@ -37,6 +37,7 @@
 
 #include "jdksmidi/world.h"
 #include "jdksmidi/multitrack.h"
+#include "jdksmidi/alloc.h"
 
 #ifndef DEBUG_MDMLTTRK
 #define DEBUG_MDMLTTRK 0

@@ -68,25 +68,6 @@ void LastEventsProlongation( MIDIMultiTrack &tracks, int track_num, MIDIClockTim
 // add "pause" after last track event
 bool AddEndingPause( MIDIMultiTrack &tracks, int track_num, MIDIClockTime pause_ticks );
 
-template <class I>
-inline void jdks_safe_delete_object( I *&obj )
-{
-    delete obj;
-    obj = 0;
-}
-
-template <class I>
-inline void jdks_safe_delete_array( I *&arr )
-{
-    delete[] arr;
-    arr = 0;
-}
-
-template <class D>
-inline int jdks_float2int( D d )
-{
-    return int( d >= D( 0. ) ? ( d + D( 0.5 ) ) : ( d - D( 0.5 ) ) );
-}
 }
 
 #endif

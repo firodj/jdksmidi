@@ -33,6 +33,7 @@
 
 #include "jdksmidi/world.h"
 #include "jdksmidi/sequencer.h"
+#include "jdksmidi/alloc.h"
 
 namespace jdksmidi
 {

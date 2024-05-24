@@ -37,6 +37,7 @@
 
 #include "jdksmidi/world.h"
 #include "jdksmidi/parser.h"
+#include "jdksmidi/alloc.h"
 
 #ifndef DEBUG_MDPARSER
 #define DEBUG_MDPARSER 0

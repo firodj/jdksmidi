@@ -37,6 +37,7 @@
 
 #include "jdksmidi/world.h"
 #include "jdksmidi/fileread.h"
+#include "jdksmidi/alloc.h"
 
 // Standard MIDI-File Format Spec. 1.1, page 9 of 18:
 // "Sysex events and meta events cancel any running status which was in effect.

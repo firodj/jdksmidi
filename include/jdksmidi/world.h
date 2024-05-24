@@ -87,6 +87,4 @@ MIDI Files easily.
 #endif
 }
 
-#include "jdksmidi/utils.h"
-
 #endif

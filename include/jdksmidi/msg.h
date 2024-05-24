@@ -108,7 +108,7 @@ public:
 
     /// Create a human readable ascii string describing the message.  This is potentially unsafe as the 'txt'
     /// param must point to a buffer of at least 64 chars long.
-    const char *MsgToText( char *txt ) const;
+    const char *MsgToText( char *txt, size_t txtsize = 64 ) const;
 
     ///@name The Query methods.
     //@{

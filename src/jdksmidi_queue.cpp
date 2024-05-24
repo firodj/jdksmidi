@@ -27,6 +27,7 @@
 //
 
 #include "jdksmidi/world.h"
+#include "jdksmidi/alloc.h"
 #include "jdksmidi/queue.h"
 
 namespace jdksmidi

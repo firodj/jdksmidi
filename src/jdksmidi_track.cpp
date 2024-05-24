@@ -41,7 +41,7 @@
 
 #include "jdksmidi/world.h"
 #include "jdksmidi/track.h"
-
+#include "jdksmidi/alloc.h"
 #include "jdksmidi/matrix.h"
 
 #ifndef DEBUG_MDTRACK

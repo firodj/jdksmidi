@@ -37,6 +37,7 @@
 
 #include "jdksmidi/world.h"
 #include "jdksmidi/sysex.h"
+#include "jdksmidi/alloc.h"
 
 #ifndef DEBUG_MDSYSEX
 #define DEBUG_MDSYSEX 0

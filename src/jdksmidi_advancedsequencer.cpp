@@ -32,6 +32,7 @@
 
 #include "jdksmidi/world.h"
 #include "jdksmidi/advancedsequencer.h"
+#include "jdksmidi/alloc.h"
 
 /* NOTE BY NC: ISSUE: if you include "midi.h" before "world.h" the compiler
  * gives errors. This is because

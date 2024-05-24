@@ -28,6 +28,7 @@
 
 #include "jdksmidi/world.h"
 #include "jdksmidi/process.h"
+#include "jdksmidi/alloc.h"
 
 namespace jdksmidi
 {
