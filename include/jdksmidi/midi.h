@@ -92,7 +92,7 @@ enum
 {
     C_LSB = 0x20, ///< add this to a non-switch controller 0x00...0x13 to access the LSB.
 
-    C_GM_BANK = 0x00,     ///< general midi bank select
+    C_GM_BANK = 0x00,     ///< general midi bank select MSB (Coarse)
     C_MODULATION = 0x01,  ///< modulation
     C_BREATH = 0x02,      ///< breath controller
     C_FOOT = 0x04,        ///< foot controller
@@ -106,6 +106,8 @@ enum
     C_GENERAL_2 = 0x11,   ///< general purpose controller 2
     C_GENERAL_3 = 0x12,   ///< general purpose controller 3
     C_GENERAL_4 = 0x13,   ///< general purpose controller 4
+
+    C_GM_BANK_LSB = 0x20,     ///< general midi bank select LSB (Fine), sometimes ignored
 
     C_DAMPER = 0x40,     ///< hold pedal (sustain)
     C_PORTA = 0x41,      ///< portamento switch
