@@ -139,7 +139,7 @@ void MIDIMultiTrack::Clear()
 {
     for ( int i = 0; i < number_of_tracks; ++i )
     {
-        tracks[i]->Clear();
+        if ( tracks[i] ) tracks[i]->Clear();
     }
 }
 
@@ -149,7 +149,7 @@ int MIDIMultiTrack::GetNumTracksWithEvents() const
 
     for ( i = number_of_tracks - 1; i >= 0; --i )
     {
-        if ( !tracks[i]->IsTrackEmpty() )
+        if ( tracks[i] && !tracks[i]->IsTrackEmpty() )
             break;
     }
 
@@ -160,7 +160,7 @@ void MIDIMultiTrack::SortEventsOrder()
 {
     for ( int i = 0; i < number_of_tracks; ++i )
     {
-        if ( !tracks[i]->EventsOrderOK() )
+        if ( tracks[i] && !tracks[i]->EventsOrderOK() )
         {
             tracks[i]->SortEventsOrder();
         }
