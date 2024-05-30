@@ -303,10 +303,7 @@ bool MIDIFileRead::Parse()
     {
         ReadTrack();
 
-        if ( abort_parse )
-        {
-            return false;
-        }
+        if ( abort_parse ) return cur_track + 1 == n;
     }
 
     return true;
@@ -376,7 +373,6 @@ int MIDIFileRead::ReadHeader()
 
     header_division = division;
     event_handler->mf_header( the_format, ntrks, division );
-    // printf( "\nto be read = %d\n", to_be_read );
 
     while ( to_be_read > 0 )
         EGetC();
@@ -411,6 +407,7 @@ void MIDIFileRead::ReadTrack()
         return;
 
     to_be_read = Read32Bit();
+
     cur_time = 0;
     event_handler->mf_starttrack( cur_track );
 
@@ -474,9 +471,9 @@ void MIDIFileRead::ReadTrack()
                 mf_error( "Fail MetaEvent" );
 
             if (type == MF_META_END_OF_TRACK) {
+                eot_reached = 1;
                 if (to_be_read)
                     event_handler->mf_warning( "End of track but track length still want read" );
-                to_be_read = 0;
             }
             break;
 
