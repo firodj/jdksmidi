@@ -505,13 +505,13 @@ bool MIDIShowControlPacket::StoreAsciiNum( MIDISystemExclusive *e, const MIDICue
     case 0:
         break;
     case 1:
-        sprintf( buf, "%ld", num.GetV1() );
+        snprintf( buf, 32, "%ld", num.GetV1() );
         break;
     case 2:
-        sprintf( buf, "%ld.%ld", num.GetV1(), num.GetV2() );
+        snprintf( buf, 32, "%ld.%ld", num.GetV1(), num.GetV2() );
         break;
     case 3:
-        sprintf( buf, "%ld.%ld.%ld", num.GetV1(), num.GetV2(), num.GetV3() );
+        snprintf( buf, 32, "%ld.%ld.%ld", num.GetV1(), num.GetV2(), num.GetV3() );
         break;
     }
 

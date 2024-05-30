@@ -110,6 +110,7 @@ enum
     // LSBs
     C_GM_BANK_LSB = 0x20,     ///< general midi bank select LSB (Fine), sometimes ignored
     C_MAIN_VOLUME_LSB = 0x27, ///< volume LSB
+    C_PAN_LSB = 0x2A,         ///< pan pot LSB
     // .. 0x3F,
 
     C_DAMPER = 0x40,     ///< hold pedal (sustain)
