@@ -119,6 +119,8 @@ enum
     C_SOFT_PEDAL = 0x43, ///< soft pedal
     //              0x44   Legato Footswitch
     C_HOLD_2 = 0x45, ///< hold pedal 2
+    C_HARMONIC = 0x47,
+    C_BRIGHTNESS = 0x4A,
     /*
        0x46, // Sound Controller 1, default: Sound Variation
        0x47, // Sound Controller 2, default: Timbre/Harmonic Intens.
