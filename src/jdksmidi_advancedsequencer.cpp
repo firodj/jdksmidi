@@ -77,6 +77,8 @@ AdvancedSequencer::AdvancedSequencer( MIDISequencerGUIEventNotifier *n )
 #if defined _WIN32 || defined WIN32
     driver( new MIDIDriverWin32() ), /* NEW BY NC: queue_size given as default
                                           parameter */
+#elif defined __APPLE__
+
 #else
     driver( new MIDIDriverAlsa() ),
 #endif // _WIN32
@@ -107,6 +109,8 @@ AdvancedSequencer::AdvancedSequencer( MIDIMultiTrack *mlt,
 #if defined _WIN32 || defined WIN32
     driver( new MIDIDriverWin32() ), /* NEW BY NC: queue_size given as default
                                           parameter */
+#elif defined __APPLE__
+
 #else
     driver( new MIDIDriverAlsa() ),
 #endif // _WIN32
@@ -133,6 +137,8 @@ AdvancedSequencer::AdvancedSequencer( MIDIManager *mgr_ )
 #if defined _WIN32 || defined WIN32
     driver( new MIDIDriverWin32() ), /* NEW BY NC: queue_size given as default
                                           parameter */
+#elif defined __APPLE__
+
 #else
     driver( new MIDIDriverAlsa() ),
 #endif // _WIN32

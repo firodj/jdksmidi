@@ -1,4 +1,4 @@
-cmake_minimum_required (VERSION 2.8)
+cmake_minimum_required (VERSION 3.20)
 project (jdksmidi)
 
 set(CMAKE_CXX_STANDARD 17)
@@ -49,7 +49,7 @@ message(STATUS "Compiling with support for: ${apilist}")
 string(REPLACE ";" " " api "${API_DEFS}")
 
 list (APPEND SOURCEFILES
-  src/jdksmidi_advancedsequencer.cpp
+  #src/jdksmidi_advancedsequencer.cpp
   src/jdksmidi_driver.cpp
   src/jdksmidi_driverdump.cpp
   src/jdksmidi_edittrack.cpp
@@ -85,7 +85,7 @@ target_include_directories(${PROJECT_NAME}
   PUBLIC "$<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>"
 )
 
-target_link_libraries(${PROJCET_NAME} rtmidi)
+target_link_libraries(${PROJECT_NAME} rtmidi)
 
 if( ${JDKSMIDI_BUILD_EXAMPLES} )
   #link_directories( ${JDKSMIDI_BINARY_DIR} )
