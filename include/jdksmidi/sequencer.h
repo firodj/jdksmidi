@@ -222,9 +222,9 @@ public:
         return en;
     }
 
-    virtual void SetEnable( bool f )
+    virtual void SetEnable( bool new_en )
     {
-        en = f;
+        en = new_en;
     }
 
 private:
